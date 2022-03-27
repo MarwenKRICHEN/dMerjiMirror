@@ -3,4 +3,32 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+<!--    Global-->
+    <string name="global.or">OR</string>
+
+<!--    User-->
+    <string name="user.full.name">Full name</string>
+    <string name="user.username">Username</string>
+    <string name="user.avatar">Avatar</string>
+    <string name="user.password">Password</string>
+
+<!--    SignIn-->
+    <string name="sign.in.username.email">Username / Email</string>
+    <string name="sign.in.welcome">Welcome to MojoMirror</string>
+    <string name="sign.in.forget.password">Forget password?</string>
+    <string name="sign.in.reset.password">Reset here</string>
+    <string name="sign.in.title">Sign in</string>
+    <string name="sign.in.continue.google">Continue with Google</string>
+    <string name="sign.in.no.account">No account?</string>
+    <string name="sign.in.create.one">Create one.</string>
+
+    <!--    SignUp-->
+    <string name="sign.up.create.account">Create an account</string>
+    <string name="sign.up.avatar.description">The Avatar is used by the facial recognizer integrated in your mirror to authenticate you</string>
+    <string name="sign.up.title">Sign up</string>
+    <string name="sign.up.have.account">Have account</string>
+    <string name="sign.up.sign.in">Sign in.</string>
+
+
 </resources>
