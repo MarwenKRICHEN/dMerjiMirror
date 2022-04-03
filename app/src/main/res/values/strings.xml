@@ -12,6 +12,7 @@
     <string name="user.username">Username</string>
     <string name="user.avatar">Avatar</string>
     <string name="user.password">Password</string>
+    <string name="user.email">Email</string>
 
 <!--    SignIn-->
     <string name="sign.in.username.email">Username / Email</string>
@@ -27,7 +28,7 @@
     <string name="sign.up.create.account">Create an account</string>
     <string name="sign.up.avatar.description">The Avatar is used by the facial recognizer integrated in your mirror to authenticate you</string>
     <string name="sign.up.title">Sign up</string>
-    <string name="sign.up.have.account">Have account</string>
+    <string name="sign.up.have.account">Have account?</string>
     <string name="sign.up.sign.in">Sign in.</string>
 
 

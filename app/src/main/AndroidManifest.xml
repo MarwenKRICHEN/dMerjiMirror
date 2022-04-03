@@ -12,6 +12,7 @@
         <activity
             android:name=".AuthenticationActivity"
             android:configChanges="orientation|screenSize"
+            android:theme="@style/Theme.Authentication"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

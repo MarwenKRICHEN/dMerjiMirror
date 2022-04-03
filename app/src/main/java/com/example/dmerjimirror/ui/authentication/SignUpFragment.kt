@@ -4,17 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.example.dmerjimirror.databinding.FragmentDashboardBinding
 import com.example.dmerjimirror.databinding.FragmentSignInBinding
-import com.example.dmerjimirror.ui.dashboard.DashboardViewModel
+import com.example.dmerjimirror.databinding.FragmentSignUpBinding
 import com.google.android.material.transition.MaterialSharedAxis
 
-class SignInFragment : Fragment() {
-    private var _binding: FragmentSignInBinding? = null
+class SignUpFragment : Fragment() {
+    private var _binding: FragmentSignUpBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,15 +22,14 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
+        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
 
-        binding.createOne.setOnClickListener {
-            val action = SignInFragmentDirections.actionSignInFragmentToSignUpFragment()
-            findNavController().navigate(action)
+        binding.signIn.setOnClickListener {
+            activity?.onBackPressed()
         }
 
         return root
