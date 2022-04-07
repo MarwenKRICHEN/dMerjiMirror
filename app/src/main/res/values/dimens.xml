@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="button_corner_radius">5dp</dimen>
     <dimen name="text_field_margin_top">20dp</dimen>
-    <dimen name="layout_component_small_height">150</dimen>
-    <dimen name="layout_component_small_width">120</dimen>
+    <dimen name="layout_component_small_height">150dp</dimen>
+    <dimen name="layout_component_small_width">120dp</dimen>
+    <dimen name="layout_component_large_height">80dp</dimen>
 </resources>

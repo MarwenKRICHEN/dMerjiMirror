@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">dMerjiMirror</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
 <!--    Global-->
     <string name="global.or">OR</string>
+    <string name="global.overview">Overview</string>
+    <string name="global.components">Components</string>
+    <string name="global.settings">Settings</string>
+    <string name="global.cancel">Cancel</string>
+    <string name="global.save">Save</string>
 
 <!--    User-->
     <string name="user.full.name">Full name</string>
@@ -30,6 +32,39 @@
     <string name="sign.up.title">Sign up</string>
     <string name="sign.up.have.account">Have account?</string>
     <string name="sign.up.sign.in">Sign in.</string>
+
+    <!--    sign out-->
+    <string name="sign.out.description">Are you sure you want to sign out, we will miss you…</string>
+    <string name="sign.out.title">Sign out</string>
+
+    <!--    Overview-->
+    <string name="overview.welcome">Welcome %1$s</string>
+    <string name="overview.drag.drop">Drag and drop to customize your mirror</string>
+
+    <!--    Components-->
+    <string name="component.weather">Weather</string>
+    <string name="component.clock">Clock</string>
+    <string name="component.todo.list">Todo List</string>
+    <string name="component.calendar">Calendar</string>
+    <string name="component.news.feed">News Feed</string>
+    <string name="component.compliment">Compliment</string>
+    <string name="component.weather.forecast">Weather Forecast</string>
+    <string name="component.none">N/A</string>
+
+    <!--    Settings-->
+    <string name="settings.section.profile">Profile Settings</string>
+    <string name="settings.section.advanced">Advanced</string>
+    <string name="settings.section.preferences">Preferences</string>
+    <string name="settings.profile.edit">Edit Profile</string>
+    <string name="settings.profile.change.password">Change Password</string>
+    <string name="settings.profile.change.email">Change Email</string>
+    <string name="settings.advanced.time.format">Time format</string>
+    <string name="settings.advanced.units">Units</string>
+    <string name="settings.advanced.unit.imperial">imperial</string>
+    <string name="settings.advanced.unit.metric">metric</string>
+    <string name="settings.preferences.notification">Send Notifications</string>
+    <string name="settings.preferences.face.recognition">Sign in with Face Recognition</string>
+    <string name="settings.preferences.dark.theme">Dark Theme</string>
 
 
 </resources>

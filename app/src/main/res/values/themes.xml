@@ -1,23 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.DMerjiMirror" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.DMerjiMirror" parent="Theme.Material3.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/error</item>
-        <item name="colorPrimaryVariant">@color/error</item>
-        <item name="colorOnPrimary">@color/error</item>
-        <!--        navigation bar active text color-->
-        <item name="colorOnSurface">@color/main_color</item>
-        <item name="colorSurface">@color/error</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!--        app bar text color-->
+        <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurface">@color/main_color</item>
         <!--        navigation bar inactive color-->
-        <item name="colorOnSurfaceVariant">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/error</item>
-        <item name="colorSecondaryVariant">@color/error</item>
-        <item name="colorOnSecondary">@color/error</item>
+        <item name="colorOnSurfaceVariant">@color/black</item>
         <!--        navigation bar active icon color-->
-        <item name="colorOnSecondaryContainer">@color/black</item>
+        <item name="colorOnSecondaryContainer">@color/main_color</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">@color/dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/main_color</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_medium</item>
 
@@ -38,6 +34,20 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <!--    NavigationBar Style-->
+    <style name="NavigationBarActiveIndicator">
+        <!--The color to be used for the navigation item's active indicator. -->
+        <item name="android:color">@color/light_gray</item>
+        <!--The desired width of the navigation items' active indicator. -->
+        <item name="android:width">60dp</item>
+        <!--The desired height of the navigation items' active indicator. -->
+        <item name="android:height">30dp</item>
+        <!--The shape appearance style to be used for the navigation items' active indicator. -->
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
+        <!--The start and end margin used by the navigation items' active indicator. -->
+        <!--        <item name="marginHorizontal">50dp</item>-->
     </style>
 
 </resources>
