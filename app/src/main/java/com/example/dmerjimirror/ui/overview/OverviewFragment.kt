@@ -2,6 +2,7 @@ package com.example.dmerjimirror.ui.overview
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,16 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentOverviewBinding
+import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.ui.components.ComponentsViewModel
+import com.example.dmerjimirror.utils.Metrics
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -55,14 +60,82 @@ class OverviewFragment : Fragment() {
         mRecyclerView = binding.componentsRecycler
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         mRecyclerView.layoutManager = GridLayoutManager(this.context, 3)
-        mRecyclerView.adapter = SmallComponentAdapter(overviewViewModel.components.value ?: arrayListOf())
+        mRecyclerView.adapter = SmallComponentAdapter(
+            requireContext(),
+            overviewViewModel.components.value ?: arrayListOf()
+        )
+
+        binding.newsComponent.componentName.text = context?.getString(R.string.component_news_feed)
 
         overviewViewModel.components.observe(viewLifecycleOwner, Observer {
             mRecyclerView.adapter
         })
 
+        setupDragAndDrop()
 
         return root
+    }
+
+    private fun setupDragAndDrop() {
+        // drag and drop
+        val simpleCallback: ItemTouchHelper.SimpleCallback =
+            object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END,
+                0
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder,
+                    target: RecyclerView.ViewHolder
+                ): Boolean {
+                    val from = viewHolder.adapterPosition
+                    val to = target.adapterPosition
+                    Log.d(
+                        "ComponentMoved",
+                        "from: ${Component.getPositionStringFromIndex(from)} to " +
+                                Component.getPositionStringFromIndex(to)
+                    )
+                    Component.move(
+                        (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents(),
+                        from,
+                        to
+                    )
+                    mRecyclerView.adapter?.notifyItemMoved(from, to)
+                    return false
+                }
+
+
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {}
+                override fun onSelectedChanged(
+                    viewHolder: RecyclerView.ViewHolder?,
+                    actionState: Int
+                ) {
+                    super.onSelectedChanged(viewHolder, actionState)
+                    if (actionState == ItemTouchHelper.ACTION_STATE_DRAG) {
+                        val card = (viewHolder?.itemView as MaterialCardView?)
+                        card?.isDragged = true
+                    }
+                }
+
+                override fun clearView(
+                    recyclerView: RecyclerView,
+                    viewHolder: RecyclerView.ViewHolder
+                ) {
+                    super.clearView(recyclerView, viewHolder)
+                    val card = (viewHolder.itemView as MaterialCardView?)
+                    card?.isDragged = false
+                    // update DB
+                    CoroutineScope(IO).launch {
+                        Thread.sleep(1000)
+                        val arr = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
+                        print("x")
+                    }
+                }
+
+            }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(mRecyclerView)
+
     }
 
     override fun onDestroyView() {

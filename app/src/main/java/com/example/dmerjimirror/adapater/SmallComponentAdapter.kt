@@ -1,5 +1,6 @@
 package com.example.dmerjimirror.adapater
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
-import com.example.dmerjimirror.utils.ComponentUtils
+import com.google.android.material.card.MaterialCardView
 
 class SmallComponentAdapter(
-    private val components: MutableList<Component>,
+    private val context: Context,
+    private val components: ArrayList<Component>,
 ) :
     RecyclerView.Adapter<SmallComponentAdapter.MyViewHolder>() {
 
@@ -28,9 +30,15 @@ class SmallComponentAdapter(
     }
 
     override fun onBindViewHolder(holder: SmallComponentAdapter.MyViewHolder, position: Int) {
-        val component = components.firstOrNull { it.position.uppercase() == ComponentUtils.getPositionStringFromIndex(position) }
+        val component = components.firstOrNull {
+            it.position.lowercase() == Component.getPositionStringFromIndex(position).lowercase()
+                    && it.active
+        }
+        (holder.itemView as MaterialCardView?)?.isClickable = true
         if (component == null) {
-            holder.componentName?.text = "N/A"
+            holder.componentName?.text = ""
+//            (holder.itemView as MaterialCardView?)?.setCardBackgroundColor(context.getColor(R.color.white))
+            (holder.itemView as MaterialCardView?)?.cardElevation = 0f
         } else {
             holder.componentName?.text = component.name
         }
@@ -47,7 +55,7 @@ class SmallComponentAdapter(
 
     }
 
-    fun getComponents(): MutableList<Component> {
+    fun getComponents(): ArrayList<Component> {
         return components
     }
 
