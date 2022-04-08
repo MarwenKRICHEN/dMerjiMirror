@@ -7,4 +7,5 @@
     <dimen name="layout_component_small_height">150dp</dimen>
     <dimen name="layout_component_small_width">120dp</dimen>
     <dimen name="layout_component_large_height">80dp</dimen>
+    <dimen name="pages_padding">8dp</dimen>
 </resources>

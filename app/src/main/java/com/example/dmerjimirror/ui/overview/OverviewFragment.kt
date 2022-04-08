@@ -125,11 +125,7 @@ class OverviewFragment : Fragment() {
                     val card = (viewHolder.itemView as MaterialCardView?)
                     card?.isDragged = false
                     // update DB
-                    CoroutineScope(IO).launch {
-                        Thread.sleep(1000)
-                        val arr = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
-                        print("x")
-                    }
+                    val arr = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
                 }
 
             }

@@ -6,12 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.dmerjimirror.adapater.LargeComponentAdapter
+import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentsBinding
+import com.google.android.material.transition.MaterialFadeThrough
 
 class ComponentsFragment : Fragment() {
 
     private var _binding: FragmentComponentsBinding? = null
+    private lateinit var mRecyclerView: RecyclerView
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,16 +31,26 @@ class ComponentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(ComponentsViewModel::class.java)
+        val componentsViewModel =
+            ViewModelProvider(this)[ComponentsViewModel::class.java]
 
         _binding = FragmentComponentsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
+
+        mRecyclerView = binding.componentsRecycler
+        mRecyclerView.itemAnimator = DefaultItemAnimator()
+        mRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        mRecyclerView.adapter = LargeComponentAdapter(
+            requireContext(),
+            arrayListOf()
+        )
+
+        componentsViewModel.components.observe(viewLifecycleOwner, Observer {
+            (mRecyclerView.adapter as LargeComponentAdapter?)?.setComponents(it)
+        })
         return root
     }
 
