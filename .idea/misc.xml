@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/overview.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/setting_ripple.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/settings.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/settings_signout_ripple.xml" value="0.124" />
         <entry key="app/src/main/res/layout/activity_authentication.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.21564943647991783" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.121875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.24003623188405798" />
-        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_large.xml" value="0.24003623188405798" />

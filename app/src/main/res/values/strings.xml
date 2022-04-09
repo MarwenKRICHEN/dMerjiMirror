@@ -59,10 +59,12 @@
     <string name="settings.profile.change.password">Change Password</string>
     <string name="settings.profile.change.email">Change Email</string>
     <string name="settings.advanced.time.format">Time format</string>
+    <string name="settings.advanced.time.format.12">12</string>
+    <string name="settings.advanced.time.format.24">24</string>
     <string name="settings.advanced.units">Units</string>
     <string name="settings.advanced.unit.imperial">imperial</string>
     <string name="settings.advanced.unit.metric">metric</string>
-    <string name="settings.preferences.notification">Send Notifications</string>
+    <string name="settings.preferences.notification">Enable Notifications</string>
     <string name="settings.preferences.face.recognition">Sign in with Face Recognition</string>
     <string name="settings.preferences.dark.theme">Dark Theme</string>
 

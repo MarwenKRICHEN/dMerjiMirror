@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentSettingsBinding
+import com.google.android.material.transition.MaterialFadeThrough
 
 class SettingsFragment : Fragment() {
 
@@ -28,6 +29,9 @@ class SettingsFragment : Fragment() {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        enterTransition = MaterialFadeThrough()
+        exitTransition = MaterialFadeThrough()
 
         binding.timeFormatButtons.check(R.id.timeFormat24)
 

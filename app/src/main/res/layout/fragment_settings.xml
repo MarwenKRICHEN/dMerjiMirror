@@ -49,7 +49,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
                     android:src="@drawable/arrow_right"
                     app:tint="@color/settings_primary_text" />
 
@@ -83,7 +82,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
                     android:src="@drawable/arrow_right"
                     app:tint="@color/settings_primary_text" />
 
@@ -116,7 +114,6 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="10dp"
                     android:src="@drawable/arrow_right"
                     app:tint="@color/settings_primary_text" />
 
@@ -147,7 +144,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:orientation="horizontal"
-                android:padding="@dimen/settings_cell_padding">
+                android:paddingStart="@dimen/settings_cell_padding"
+                android:paddingTop="8dp"
+                android:paddingEnd="@dimen/settings_cell_padding"
+                android:paddingBottom="8dp">
 
                 <TextView
                     style="@style/Settings.Cell.Primary.TextStyle"
@@ -162,25 +162,71 @@
                 <com.google.android.material.button.MaterialButtonToggleGroup
                     android:id="@+id/timeFormatButtons"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     app:selectionRequired="true"
-                    app:singleSelection="true"
-                    app:elevation="0dp"
-                    android:layout_height="wrap_content">
+                    app:singleSelection="true">
+
                     <Button
                         android:id="@+id/timeFormat12"
+                        style="@style/Settings.Toggle.Button.Elevated.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="12"
-                        style="@style/Settings.Toggle.Button.Outlined.Button"
-                        />
+                        android:text="12" />
 
                     <Button
                         android:id="@+id/timeFormat24"
+                        style="@style/Settings.Toggle.Button.Elevated.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="24"
-                        style="@style/Settings.Toggle.Button.Outlined.Button"
-                        />
+                        android:text="24" />
+                </com.google.android.material.button.MaterialButtonToggleGroup>
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/settings_cell_padding"
+                android:paddingTop="8dp"
+                android:paddingEnd="@dimen/settings_cell_padding"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    style="@style/Settings.Cell.Primary.TextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:text="@string/settings.advanced.units" />
+
+
+                <com.google.android.material.button.MaterialButtonToggleGroup
+                    android:id="@+id/unitButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:selectionRequired="true"
+                    app:singleSelection="true">
+
+                    <Button
+                        android:id="@+id/unitImperial"
+                        style="@style/Settings.Toggle.Button.Elevated.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings.advanced.unit.imperial" />
+
+                    <Button
+                        android:id="@+id/unitMetric"
+                        style="@style/Settings.Toggle.Button.Elevated.Button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/settings.advanced.unit.metric" />
                 </com.google.android.material.button.MaterialButtonToggleGroup>
             </LinearLayout>
 
@@ -190,8 +236,152 @@
                 android:layout_height="wrap_content" />
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/PreferencesSection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/settings_section_margin_top"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Settings.Section.Header.TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings.section.preferences" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/settings_cell_padding">
+
+                <TextView
+                    style="@style/Settings.Cell.Primary.TextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:text="@string/settings.preferences.notification" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/notificationsSwitch"
+                    style="@style/Settings.Switch.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/settings_cell_padding">
+
+                <TextView
+                    style="@style/Settings.Cell.Primary.TextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:text="@string/settings.preferences.face.recognition" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/faceRecognitionSwitch"
+                    style="@style/Settings.Switch.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/settings_cell_padding">
+
+                <TextView
+                    style="@style/Settings.Cell.Primary.TextStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="2"
+                    android:text="@string/settings.preferences.dark.theme" />
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/darkThemeSwitch"
+                    style="@style/Settings.Switch.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+
+            </LinearLayout>
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            style="@style/Settings.Cell.Clickable"
+            android:background="@drawable/settings_signout_ripple"
+            android:orientation="vertical">
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/signOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="@string/sign.out.title"
+                android:textColor="@color/main_color"
+                android:padding="12dp"
+                android:textSize="18sp"/>
+
+            <com.google.android.material.divider.MaterialDivider
+                style="@style/Settings.Divider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
 
 
     </LinearLayout>
