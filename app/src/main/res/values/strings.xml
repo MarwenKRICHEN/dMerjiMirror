@@ -14,6 +14,7 @@
     <string name="user.username">Username</string>
     <string name="user.avatar">Avatar</string>
     <string name="user.password">Password</string>
+    <string name="user.confirm.password">Confirm Password</string>
     <string name="user.email">Email</string>
 
 <!--    SignIn-->
@@ -68,5 +69,13 @@
     <string name="settings.preferences.face.recognition">Sign in with Face Recognition</string>
     <string name="settings.preferences.dark.theme">Dark Theme</string>
 
+<!--    Edit-->
+    <string name="edit.change.avatar">Change avatar</string>
+    <string name="edit.new.email">New Email</string>
+    <string name="edit.type.new.email">Type your new email</string>
+    <string name="edit.your.password">Your Password</string>
+    <string name="edit.current.password">Current Password</string>
+    <string name="edit.new.password">New Password</string>
+    <string name="edit.password.hint">********</string>
 
 </resources>

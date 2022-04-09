@@ -23,8 +23,8 @@
         <item name="android:textColor">@color/main_color</item>
         <item name="textAllCaps">false</item>
         <item name="rippleColor">@color/main_color_tint</item>
-        <item name="minHeight">0dp</item>
-        <item name="minWidth">0dp</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
         <item name="shapeAppearance">@style/ShapeAppearance.App.SmallComponent</item>
     </style>
 
@@ -117,6 +117,29 @@
         <item name="useMaterialThemeColors">false</item>
         <item name="trackTint">#E4E4E4</item>
         <item name="thumbTint">@color/switch_thumb</item>
+    </style>
+
+    <style name="Settings.Edit.Header.TextButton" parent="MyText.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">13sp</item>
+        <item name="rippleColor">@color/black</item>
+    </style>
+
+    <!--    Bottom Sheets-->
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+    <style name="BaseBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
     </style>
 
 </resources>

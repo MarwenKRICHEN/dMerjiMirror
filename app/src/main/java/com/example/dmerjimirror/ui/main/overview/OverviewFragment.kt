@@ -1,12 +1,10 @@
-package com.example.dmerjimirror.ui.overview
+package com.example.dmerjimirror.ui.main.overview
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,15 +17,8 @@ import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentOverviewBinding
 import com.example.dmerjimirror.library.model.Component
-import com.example.dmerjimirror.ui.components.ComponentsViewModel
-import com.example.dmerjimirror.utils.Metrics
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class OverviewFragment : Fragment() {
 

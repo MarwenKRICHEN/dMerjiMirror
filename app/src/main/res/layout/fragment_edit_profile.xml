@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.edit.edit_profile.EditProfileFragment">
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/layout_settings_edit_header" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        app:cardBackgroundColor="@color/light_gray"
+        app:cardCornerRadius="1000dp"
+        app:cardElevation="50dp"
+        app:strokeWidth="0dp">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_image" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <Button
+        style="@style/MyText.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Change Avatar"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:rippleColor="@color/black" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="100dp"
+        android:fontFamily="@font/roboto_bold"
+        android:backgroundTint="@color/text_edit_tint"
+        android:text="Marwen Krichen"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:autofillHints="name" />
+</LinearLayout>

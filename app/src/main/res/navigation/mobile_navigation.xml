@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_overview"
-        android:name="com.example.dmerjimirror.ui.overview.OverviewFragment"
+        android:name="com.example.dmerjimirror.ui.main.overview.OverviewFragment"
         tools:layout="@layout/fragment_overview" />
 
     <fragment
         android:id="@+id/navigation_components"
-        android:name="com.example.dmerjimirror.ui.components.ComponentsFragment"
+        android:name="com.example.dmerjimirror.ui.main.components.ComponentsFragment"
         android:label="@string/global.components"
         tools:layout="@layout/fragment_components" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.example.dmerjimirror.ui.settings.SettingsFragment"
+        android:name="com.example.dmerjimirror.ui.main.settings.SettingsFragment"
         android:label="@string/global.settings"
         tools:layout="@layout/fragment_settings" />
 </navigation>

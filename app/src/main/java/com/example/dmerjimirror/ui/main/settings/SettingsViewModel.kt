@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.ui.settings
+package com.example.dmerjimirror.ui.main.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
