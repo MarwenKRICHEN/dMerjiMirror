@@ -7,7 +7,7 @@
     android:backgroundTint="@color/component"
     android:orientation="vertical"
     android:clickable="true"
-    android:layout_margin="@dimen/pages_padding"
+    android:layout_margin="@dimen/pages_with_recycler_padding"
     app:cardElevation="5dp"
     app:strokeColor="@color/black"
     app:strokeWidth="0dp">

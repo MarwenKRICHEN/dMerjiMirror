@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/pages_padding"
+        android:padding="@dimen/pages_with_recycler_padding"
         android:orientation="vertical">
 
         <TextView
@@ -32,8 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingTop="@dimen/pages_padding"
-            android:paddingBottom="@dimen/pages_padding"
+            android:paddingTop="@dimen/pages_with_recycler_padding"
+            android:paddingBottom="@dimen/pages_with_recycler_padding"
             android:overScrollMode="never"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,8 +44,8 @@
             layout="@layout/layout_component_small"
             android:layout_width="match_parent"
             android:layout_height="@dimen/layout_component_small_height"
-            android:layout_marginStart="@dimen/pages_padding"
-            android:layout_marginEnd="@dimen/pages_padding"
+            android:layout_marginStart="@dimen/pages_with_recycler_padding"
+            android:layout_marginEnd="@dimen/pages_with_recycler_padding"
             android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

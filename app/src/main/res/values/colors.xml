@@ -21,4 +21,6 @@
     <color name="error">#E43224</color>
     <color name="background">#FFF</color>
     <color name="transparent">#00000000</color>
+    <color name="settings_primary_text">#151522</color>
+    <color name="setting_ripple">#B1B1B1</color>
 </resources>

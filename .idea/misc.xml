@@ -5,9 +5,11 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/add_avatar.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/arrow_right.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/avatar_circle_background.xml" value="0.1935" />
         <entry key="app/src/main/res/drawable/components.xml" value="0.1055" />
         <entry key="app/src/main/res/drawable/overview.xml" value="0.124" />
+        <entry key="app/src/main/res/drawable/setting_ripple.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/settings.xml" value="0.124" />
         <entry key="app/src/main/res/layout/activity_authentication.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24003623188405798" />
@@ -16,6 +18,7 @@
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.121875" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_large.xml" value="0.24003623188405798" />
