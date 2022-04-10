@@ -7,14 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.adapater.LargeComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentsBinding
+import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.listener.RecyclerItemNavigation
 import com.google.android.material.transition.MaterialFadeThrough
+import com.google.android.material.transition.MaterialSharedAxis
 
-class ComponentsFragment : Fragment() {
+class ComponentsFragment : Fragment(), RecyclerItemNavigation {
 
     private var _binding: FragmentComponentsBinding? = null
     private lateinit var mRecyclerView: RecyclerView
@@ -42,7 +46,8 @@ class ComponentsFragment : Fragment() {
         mRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         mRecyclerView.adapter = LargeComponentAdapter(
             requireContext(),
-            arrayListOf()
+            arrayListOf(),
+            this
         )
 
         componentsViewModel.components.observe(viewLifecycleOwner, Observer {
@@ -51,8 +56,16 @@ class ComponentsFragment : Fragment() {
         return root
     }
 
+    override fun onItemClick(component: Component) {
+        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
+        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
+        val action = ComponentsFragmentDirections.actionNavigationComponentsToTodoDetailFragment()
+        findNavController().navigate(action)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }

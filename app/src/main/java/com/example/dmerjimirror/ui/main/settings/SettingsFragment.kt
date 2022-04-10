@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentSettingsBinding
 import com.example.dmerjimirror.ui.edit.edit_email.EditEmailFragment
@@ -59,6 +60,11 @@ class SettingsFragment : Fragment() {
                     show(it, tag)
                 }
             }
+        }
+
+        binding.signOut.setOnClickListener {
+            val action = SettingsFragmentDirections.actionNavigationSettingsToTodoDetailFragment()
+            findNavController().navigate(action)
         }
 
         notificationsViewModel.text.observe(viewLifecycleOwner) {

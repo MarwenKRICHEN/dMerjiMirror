@@ -1,3 +1,10 @@
 package com.example.dmerjimirror.library.model
 
-data class Clock(val timeZone: Int, val isDigital: Boolean): Component()
+class Clock(
+    id: Int,
+    name: String,
+    position: String,
+    active: Boolean,
+    val timeZone: Int,
+    val isDigital: Boolean
+) : Component(id, name, position, active)

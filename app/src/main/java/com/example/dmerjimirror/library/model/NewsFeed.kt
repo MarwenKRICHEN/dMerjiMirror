@@ -1,3 +1,9 @@
 package com.example.dmerjimirror.library.model
 
-data class NewsFeed(val showDescription: Boolean): Component()
+class NewsFeed(
+    id: Int,
+    name: String,
+    position: String,
+    active: Boolean,
+    val showDescription: Boolean
+) : Component(id, name, position, active)

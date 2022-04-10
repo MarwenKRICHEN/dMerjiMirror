@@ -18,7 +18,7 @@ import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 
-class TodoComponentAdapter(val context: Context, val items: List<Items>) :
+class TodoComponentAdapter(val context: Context, private val items: ArrayList<Items>) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -71,7 +71,9 @@ class TodoComponentAdapter(val context: Context, val items: List<Items>) :
     class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
         private val name: TextView? = itemView.findViewById(R.id.component_name)
         private val image: ImageView? = itemView.findViewById(R.id.component_image)
-        private val enabledSwitch: SwitchMaterial? = itemView.findViewById(R.id.componentEnabledSwitch)
+        private val enabledSwitch: SwitchMaterial? =
+            itemView.findViewById(R.id.componentEnabledSwitch)
+
         override fun bindType(item: Items) {
             (item as ComponentHeader?)?.apply {
                 name?.text = this.component.name
@@ -100,6 +102,16 @@ class TodoComponentAdapter(val context: Context, val items: List<Items>) :
             }
         }
 
+    }
+
+    fun addTodoItem(todoItem: TodoItem) {
+        items.add(todoItem)
+        notifyItemInserted(items.count() - 1)
+    }
+
+    fun addTodoItems(todoItems: ArrayList<TodoItem>) {
+        items.addAll(todoItems)
+        notifyDataSetChanged()
     }
 
 }

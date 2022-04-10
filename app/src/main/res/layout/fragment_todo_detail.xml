@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/pages_padding"
+    android:transitionGroup="true"
     tools:context=".ui.details.todo.TodoDetailFragment">
 
-    <include
-        android:id="@+id/detailHeader"
-        layout="@layout/layout_component_detail_header" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="@dimen/pages_padding"
+        android:clipToPadding="false"/>
 
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

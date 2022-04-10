@@ -45,8 +45,7 @@ class OverviewFragment : Fragment() {
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
 
-        (activity as MainActivity?)?.supportActionBar?.title =
-            getString(R.string.overview_welcome, "Hey")
+        (activity as MainActivity?)?.supportActionBar?.title = getString(R.string.overview_welcome, "Hey")
 
         mRecyclerView = binding.componentsRecycler
         mRecyclerView.itemAnimator = DefaultItemAnimator()

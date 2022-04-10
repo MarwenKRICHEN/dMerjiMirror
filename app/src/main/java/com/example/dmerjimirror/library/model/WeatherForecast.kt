@@ -1,3 +1,11 @@
 package com.example.dmerjimirror.library.model
 
-data class WeatherForecast(val numberOfDays: Int, val colored: Boolean): Weather()
+class WeatherForecast(
+    id: Int,
+    name: String,
+    position: String,
+    active: Boolean,
+    location: String,
+    val numberOfDays: Int,
+    val colored: Boolean
+) : Weather(id, name, position, active, location)
