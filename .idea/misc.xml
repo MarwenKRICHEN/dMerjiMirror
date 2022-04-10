@@ -30,9 +30,13 @@
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_todo_detail.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_add_todo_header.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_component_detail_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_large.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_small.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_settings_edit_header.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_todo_element.xml" value="0.27207641601562504" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15462962962962962" />
       </map>
     </option>
