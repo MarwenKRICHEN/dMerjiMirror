@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/setting_ripple"
+    android:focusable="true"
+    android:clickable="true"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_light"
+            android:paddingTop="6dp"
             android:maxLines="1"
             android:textColor="@color/black"
             android:text="12-12-2022"
@@ -29,7 +33,7 @@
             android:text="Pet the dog"
             android:textColor="@color/black"
             android:paddingBottom="6dp"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:fontFamily="@font/roboto_regular"
             app:layout_constraintEnd_toStartOf="@id/todoDoneCheckBox"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +51,8 @@
             android:textColor="@color/main_color"
             android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/todoName"
-            app:layout_constraintBottom_toBottomOf="@id/todoName"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

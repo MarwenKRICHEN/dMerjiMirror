@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/todoDetailFragment"
-        android:name="com.example.dmerjimirror.ui.details.todo.TodoDetailFragment"
+        android:name="com.example.dmerjimirror.ui.details.todo.TodoElementDetailFragment"
         android:label="@string/component.todo.list"
         tools:layout="@layout/fragment_todo_detail" />
 </navigation>

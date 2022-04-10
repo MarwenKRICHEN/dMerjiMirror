@@ -1,24 +1,30 @@
 package com.example.dmerjimirror.adapater
 
-import android.app.LauncherActivity.ListItem
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.switchmaterial.SwitchMaterial
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class TodoComponentAdapter(val context: Context, private val items: ArrayList<Items>) :
+class TodoComponentAdapter(
+    val context: Context,
+    private val items: ArrayList<Items>,
+    private val showAddTodoListener: View.OnClickListener,
+    private val todoElementListener: TodoElementListener,
+) :
     RecyclerView.Adapter<ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int {
@@ -68,7 +74,7 @@ class TodoComponentAdapter(val context: Context, private val items: ArrayList<It
         abstract fun bindType(item: Items)
     }
 
-    class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
+    inner class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
         private val name: TextView? = itemView.findViewById(R.id.component_name)
         private val image: ImageView? = itemView.findViewById(R.id.component_image)
         private val enabledSwitch: SwitchMaterial? =
@@ -83,23 +89,44 @@ class TodoComponentAdapter(val context: Context, private val items: ArrayList<It
 
     }
 
-    class ViewHolderAddTodoHeader(itemView: View) : ViewHolder(itemView) {
+    inner class ViewHolderAddTodoHeader(itemView: View) : ViewHolder(itemView) {
+        private val addTodoButton: Button? = itemView.findViewById(R.id.addTodoButton)
         override fun bindType(item: Items) {
 
         }
 
+        init {
+            addTodoButton?.setOnClickListener(showAddTodoListener)
+        }
+
     }
 
-    class ViewHolderTodoItem(itemView: View) : ViewHolder(itemView) {
+    inner class ViewHolderTodoItem(itemView: View) : ViewHolder(itemView),
+        View.OnLongClickListener {
         private val deadLine: TextView? = itemView.findViewById(R.id.todoDeadLine)
         private val name: TextView? = itemView.findViewById(R.id.todoName)
         private val doneCheckBox: CheckBox? = itemView.findViewById(R.id.todoDoneCheckBox)
         override fun bindType(item: Items) {
             (item as TodoItem?)?.apply {
+                val formatter = SimpleDateFormat("EEE, MMM d yyyy", Locale.getDefault())
                 name?.text = this.todo.name
-                deadLine?.text = this.todo.deadline.toString()
+                deadLine?.text = formatter.format(this.todo.deadline)
                 doneCheckBox?.isChecked = this.todo.done
             }
+        }
+
+        init {
+            itemView.setOnLongClickListener(this)
+        }
+
+        override fun onLongClick(p0: View?): Boolean {
+            val position = adapterPosition
+            if (position != RecyclerView.NO_POSITION) {
+                val todoElement = items[position] as TodoItem?
+                if (todoElement != null)
+                    todoElementListener.showUpdateTodo(todoElement.todo, position)
+            }
+            return false
         }
 
     }
@@ -112,6 +139,11 @@ class TodoComponentAdapter(val context: Context, private val items: ArrayList<It
     fun addTodoItems(todoItems: ArrayList<TodoItem>) {
         items.addAll(todoItems)
         notifyDataSetChanged()
+    }
+
+    fun updateTodoItem(todoItem: TodoItem, position: Int) {
+        items[position] = todoItem
+        notifyItemChanged(position)
     }
 
 }

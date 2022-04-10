@@ -21,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:textColor="@color/black"
             android:layout_marginTop="5dp"
             android:text="@string/edit.new.email"/>
 
@@ -43,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
+            android:textColor="@color/black"
             android:layout_marginTop="40dp"
             android:text="@string/edit.your.password"/>
 

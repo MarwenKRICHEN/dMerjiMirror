@@ -10,6 +10,7 @@
     <string name="global.save">Save</string>
     <string name="global.delete">Delete</string>
     <string name="global.done">done</string>
+    <string name="global.add">Add</string>
 
     <!--    User-->
     <string name="user.full.name">Full name</string>
@@ -83,7 +84,12 @@
     <!--    Components Detail-->
     <string name="component.detail.enabled">Enabled</string>
     <string name="todo.add">+ Todos</string>
+    <string name="todo.add.title">Add Todo</string>
 
+    <!--    TodoElement-->
+    <string name="todo.element.name">Name</string>
+    <string name="todo.element.name.text.field">Type your todo name</string>
+    <string name="todo.element.deadline">DeadLine</string>
 
 
 </resources>
