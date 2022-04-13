@@ -11,6 +11,7 @@
     <string name="global.delete">Delete</string>
     <string name="global.done">done</string>
     <string name="global.add">Add</string>
+    <string name="global.undo">Undo</string>
 
     <!--    User-->
     <string name="user.full.name">Full name</string>
@@ -90,6 +91,7 @@
     <string name="todo.element.name">Name</string>
     <string name="todo.element.name.text.field">Type your todo name</string>
     <string name="todo.element.deadline">DeadLine</string>
+    <string name="todo.element.deleted">todo "%1$s" has been deleted</string>
 
 
 </resources>

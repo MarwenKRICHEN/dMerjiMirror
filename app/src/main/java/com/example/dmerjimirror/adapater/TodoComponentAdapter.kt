@@ -1,5 +1,6 @@
 package com.example.dmerjimirror.adapater
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,8 @@ import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,11 +24,15 @@ import kotlin.collections.ArrayList
 
 class TodoComponentAdapter(
     val context: Context,
+    val activity: Activity,
     private val items: ArrayList<Items>,
     private val showAddTodoListener: View.OnClickListener,
     private val todoElementListener: TodoElementListener,
 ) :
     RecyclerView.Adapter<ViewHolder>() {
+
+    private var lastRemovedItem: Items? = null
+    private var lastRemovedItemIndex: Int? = null
 
     override fun getItemViewType(position: Int): Int {
         return items[position].listItemType()
@@ -144,6 +151,51 @@ class TodoComponentAdapter(
     fun updateTodoItem(todoItem: TodoItem, position: Int) {
         items[position] = todoItem
         notifyItemChanged(position)
+    }
+
+    fun deleteTodoItem(position: Int) {
+        lastRemovedItemIndex = position
+        try {
+            lastRemovedItem = items[position]
+        } catch (e: IndexOutOfBoundsException) {
+            lastRemovedItem = null
+            lastRemovedItemIndex = null
+        }
+        items.removeAt(position)
+        notifyItemRemoved(position)
+        showUndoSnackbar()
+    }
+
+    private fun showUndoSnackbar() {
+        val view = activity.findViewById<View>(R.id.contentMain)
+        val snackbar: Snackbar = Snackbar.make(
+            view,
+            context.getString(
+                R.string.todo_element_deleted,
+                (lastRemovedItem as TodoItem?)?.todo?.name
+            ),
+            Snackbar.LENGTH_LONG
+        )
+        snackbar.setAction(R.string.global_undo) { undoDelete() }
+        snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                // TODO: delete from DB
+//                deleteItem((lastRemovedItem as TodoItem?)?.todo?.id)
+            }
+        })
+        snackbar.show()
+    }
+
+    private fun undoDelete() {
+        lastRemovedItemIndex?.let { index ->
+            lastRemovedItem?.let { item ->
+                items.add(index, item)
+                notifyItemInserted(index)
+                lastRemovedItemIndex = null
+                lastRemovedItem = null
+            }
+        }
+
     }
 
 }
