@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.dmerjimirror.R
@@ -91,6 +92,7 @@ class TodoComponentAdapter(
             (item as ComponentHeader?)?.apply {
                 name?.text = this.component.name
                 enabledSwitch?.isChecked = this.component.active
+                image?.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.todo_list))
             }
         }
 

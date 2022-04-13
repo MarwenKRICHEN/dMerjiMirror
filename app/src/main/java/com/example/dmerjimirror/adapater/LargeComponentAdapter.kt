@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
 import com.google.android.material.card.MaterialCardView
+import java.lang.Exception
 
 class LargeComponentAdapter(
     private val context: Context,
@@ -33,6 +35,14 @@ class LargeComponentAdapter(
     override fun onBindViewHolder(holder: LargeComponentAdapter.MyViewHolder, position: Int) {
         val component = components[position]
         holder.componentName?.text = component.name
+        try {
+            holder.componentImage?.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    context,
+                    context.resources.getIdentifier(component.getImageName(), "drawable", context.packageName)
+                )
+            )
+        } catch (e: Exception) {}
     }
 
     override fun getItemCount(): Int {

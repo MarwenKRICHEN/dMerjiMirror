@@ -3,6 +3,12 @@ package com.example.dmerjimirror.library.model
 open class Component(val id: Int, val name: String, var position: String, var active: Boolean) {
     constructor() : this(0, "", "", true)
 
+    fun getImageName(): String {
+        var newName = name
+        newName = name.replace(" ", "_")
+        return newName.lowercase()
+    }
+
     class Position {
         companion object {
             const val TOP_LEFT = "top_left"

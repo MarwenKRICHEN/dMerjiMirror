@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
 import com.google.android.material.card.MaterialCardView
+import java.lang.Exception
 
 class SmallComponentAdapter(
     private val context: Context,
@@ -37,10 +39,18 @@ class SmallComponentAdapter(
         (holder.itemView as MaterialCardView?)?.isClickable = true
         if (component == null) {
             holder.componentName?.text = ""
-//            (holder.itemView as MaterialCardView?)?.setCardBackgroundColor(context.getColor(R.color.white))
             (holder.itemView as MaterialCardView?)?.cardElevation = 0f
         } else {
             holder.componentName?.text = component.name
+            try {
+                holder.componentImage?.setImageDrawable(
+                    AppCompatResources.getDrawable(
+                        context,
+                        context.resources.getIdentifier(component.getImageName(), "drawable", context.packageName)
+                    )
+                )
+            } catch (e: Exception) {}
+
         }
     }
 
@@ -49,7 +59,7 @@ class SmallComponentAdapter(
     }
 
 
-    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var componentName: TextView? = itemView.findViewById(R.id.component_name)
         var componentImage: ImageView? = itemView.findViewById(R.id.component_image)
 
@@ -58,5 +68,6 @@ class SmallComponentAdapter(
     fun getComponents(): ArrayList<Component> {
         return components
     }
+
 
 }

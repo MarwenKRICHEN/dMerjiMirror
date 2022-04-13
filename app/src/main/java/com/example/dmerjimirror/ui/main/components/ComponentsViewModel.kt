@@ -14,7 +14,7 @@ class ComponentsViewModel : ViewModel() {
         Component(0, "Calendar", Component.Position.MIDDLE_RIGHT, true),
         Component(0, "News Feed", Component.Position.MIDDLE_RIGHT, true),
         Component(0, "Compliment", Component.Position.MIDDLE_RIGHT, true),
-        Component(0, "Weather Forecast", Component.Position.MIDDLE_RIGHT, true),
+        Component(0, "Forecast", Component.Position.MIDDLE_RIGHT, true),
     )
 
     private val _components = MutableLiveData<ArrayList<Component>>().apply {

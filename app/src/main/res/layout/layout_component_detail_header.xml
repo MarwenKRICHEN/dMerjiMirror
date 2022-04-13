@@ -11,7 +11,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:layout_marginHorizontal="@dimen/pages_padding"
-        app:cardBackgroundColor="@color/light_gray"
+        app:cardBackgroundColor="@color/component"
         app:cardCornerRadius="1000dp"
         app:cardElevation="50dp"
         app:strokeWidth="0dp">
@@ -21,6 +21,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:padding="25dp"
             android:src="@drawable/ic_baseline_image_24" />
     </com.google.android.material.card.MaterialCardView>
 
