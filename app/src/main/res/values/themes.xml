@@ -49,9 +49,41 @@
         <!--The desired height of the navigation items' active indicator. -->
         <item name="android:height">30dp</item>
         <!--The shape appearance style to be used for the navigation items' active indicator. -->
-        <item name="shapeAppearance">@style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator</item>
+        <item name="shapeAppearance">
+            @style/ShapeAppearance.Material3.NavigationBarView.ActiveIndicator
+        </item>
         <!--The start and end margin used by the navigation items' active indicator. -->
         <!--        <item name="marginHorizontal">50dp</item>-->
     </style>
+
+    <!--    Bottom Sheets-->
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
+
+    <style name="BaseBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="bottomSheetStyle">@style/BottomSheet</item>
+    </style>
+
+    <style name="BottomSheet" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/bottom_sheet_background</item>
+    </style>
+
+    <!--    Date Picker-->
+    <style name="Theme.Date.Picker" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <!-- Selected date background /  -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <!--        Title / Selected date / Switch-to-keyboard / Selected date stroke-->
+        <item name="colorOnPrimary">@color/white</item>
+        <!--  Year selection menu / Month pagination / Current date text and stroke-->
+        <item name="colorOnSurface">@color/main_color</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/roboto_medium</item>
+
+    </style>
+
 
 </resources>

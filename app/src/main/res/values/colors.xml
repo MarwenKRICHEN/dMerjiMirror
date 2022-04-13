@@ -15,6 +15,7 @@
     <color name="dark_tint">#4A4949</color>
     <color name="dark_stroke">#5B5B5B</color>
     <color name="light_gray">#E4E4E4</color>
+    <color name="dark_gray">#555555</color>
     <color name="text_color">#999999</color>
     <color name="white_38">#F0FFFFFF</color>
     <color name="alert">#E43224</color>

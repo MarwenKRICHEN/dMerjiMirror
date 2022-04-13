@@ -9,7 +9,11 @@ import com.example.dmerjimirror.databinding.FragmentAddTodoElementBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
 import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
+import com.example.dmerjimirror.utils.MaterialTextInput
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.datepicker.MaterialDatePicker
+import java.lang.Exception
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
@@ -19,6 +23,7 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
     private var todoElement: TodoElement? = null
     private var position: Int? = null
     override var state: Int = BottomSheetBehavior.STATE_COLLAPSED
+    private var simpleDateFormat: SimpleDateFormat? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -37,11 +42,12 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
         elementListener = arguments?.getSerializable("listener") as TodoElementListener?
         todoElement = arguments?.getSerializable("element") as TodoElement?
         position = arguments?.getSerializable("position") as Int?
-        setUpViews()
+        setUpViews(view)
     }
 
 
-    private fun setUpViews() {
+    private fun setUpViews(view: View) {
+        MaterialTextInput.setupClearErrors(view)
         if (todoElement != null) {
             binding.name.editText?.setText(todoElement?.name)
         }
@@ -50,22 +56,59 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
             dismissAllowingStateLoss()
         }
         binding.header.saveButton.text = context?.getString(R.string.global_add) ?: ""
+
+        binding.todoDeadLine.editText?.setOnClickListener {
+            val datePicker =
+                MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("Select date")
+                    .setTheme(R.style.Theme_Date_Picker)
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+
+            activity?.supportFragmentManager?.let { it1 -> datePicker.show(it1, "tag") }
+            datePicker.addOnPositiveButtonClickListener {
+                simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val date = simpleDateFormat?.format(it)
+                binding.todoDeadLine.editText?.setText(date)
+            }
+        }
+
         binding.header.saveButton.setOnClickListener {
             val name = binding.name.editText?.text?.toString() ?: ""
-            if (todoElement == null)
-                elementListener?.addTodo(TodoElement(-1, name, Date(), false))
-            else
-                if (position != null)
-                    elementListener?.updateTodo(
-                        TodoElement(
-                            todoElement?.id ?: -1,
-                            name,
-                            Date(),
-                            todoElement?.done ?: false
-                        ),
-                        position!!
-                    )
-            dismissAllowingStateLoss()
+            val dateString = binding.todoDeadLine.editText?.text?.toString() ?: ""
+            var error = false
+            if (name == "") {
+                binding.name.error = "This fields cannot be empty"
+                error = true
+            }
+            if (dateString == "") {
+                binding.todoDeadLine.error = "This fields cannot be empty"
+                error = true
+            }
+            if (!error) {
+                try {
+                    val date = simpleDateFormat?.parse(dateString)
+                    if (date != null) {
+                        if (todoElement == null)
+                            elementListener?.addTodo(TodoElement(-1, name, date, false))
+                        else
+                            if (position != null)
+                                elementListener?.updateTodo(
+                                    TodoElement(
+                                        todoElement?.id ?: -1,
+                                        name,
+                                        date,
+                                        todoElement?.done ?: false
+                                    ),
+                                    position!!
+                                )
+                    }
+                } catch (e: Exception) {}
+                finally {
+                    dismissAllowingStateLoss()
+                }
+            }
+
         }
 
     }

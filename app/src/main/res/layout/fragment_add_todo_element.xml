@@ -53,12 +53,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            app:startIconDrawable="@drawable/calendar"
+            app:hintEnabled="false"
             style="@style/MyTextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
+                android:hint="dd/mm/yyyy"
+                android:focusable="false"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
