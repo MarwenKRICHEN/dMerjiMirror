@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -56,6 +57,7 @@ class OverviewFragment : Fragment() {
         )
 
         binding.newsComponent.componentName.text = context?.getString(R.string.component_news_feed)
+        binding.newsComponent.componentImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.news_feed))
 
         overviewViewModel.components.observe(viewLifecycleOwner, Observer {
             mRecyclerView.adapter

@@ -18,15 +18,14 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentTodoDetailBinding
-import com.example.dmerjimirror.extension.makeGone
-import com.example.dmerjimirror.extension.makeVisible
+import com.example.dmerjimirror.library.extension.makeGone
+import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.Todo
 import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoAddHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.transition.MaterialSharedAxis
 
 

@@ -1,14 +1,8 @@
-package com.example.dmerjimirror.utils
+package com.example.dmerjimirror.library.utils
 
-import android.app.Activity
-import android.content.Context
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputLayout
 
 class MaterialTextInput {

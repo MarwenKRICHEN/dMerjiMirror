@@ -117,7 +117,7 @@ class TodoComponentAdapter(
         private val doneCheckBox: CheckBox? = itemView.findViewById(R.id.todoDoneCheckBox)
         override fun bindType(item: Items) {
             (item as TodoItem?)?.apply {
-                val formatter = SimpleDateFormat("EEE, MMM d yyyy", Locale.getDefault())
+                val formatter = SimpleDateFormat("EEE d MMM  HH:mm", Locale.getDefault())
                 name?.text = this.todo.name
                 deadLine?.text = formatter.format(this.todo.deadline)
                 doneCheckBox?.isChecked = this.todo.done

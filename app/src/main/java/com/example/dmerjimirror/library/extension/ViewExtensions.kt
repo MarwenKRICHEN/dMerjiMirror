@@ -17,13 +17,12 @@
 @file:JvmName("ViewUtils")
 @file:Suppress("UNCHECKED_CAST")
 
-package com.example.dmerjimirror.extension
+package com.example.dmerjimirror.library.extension
 
 import android.app.Activity
 import android.content.res.Configuration
 import android.os.Build
 import android.view.*
-import android.view.animation.AnimationUtils
 import androidx.annotation.Px
 import androidx.annotation.StringRes
 import androidx.core.view.*

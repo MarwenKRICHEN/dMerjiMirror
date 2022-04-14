@@ -2,20 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.DMerjiMirror" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryContainer">@color/white</item>
+        <item name="colorSecondaryContainer">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/main_color</item>
         <!--        app bar text color-->
         <item name="colorOnSurface">@color/white</item>
-        <item name="colorSurface">@color/main_color</item>
+        <!--        Time Picker Background-->
+        <item name="colorSurface">@color/white</item>
+        <item name="colorAccent">@color/main_color</item>
         <!--        navigation bar inactive color-->
         <item name="colorOnSurfaceVariant">@color/black</item>
+        <item name="colorOnSecondary">@color/main_color</item>
         <!--        navigation bar active icon color-->
         <item name="colorOnSecondaryContainer">@color/main_color</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/main_color</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:timePickerStyle">@style/Theme.MyTheme.TimePicker</item>
+
 
     </style>
 
@@ -83,6 +90,46 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_medium</item>
 
+    </style>
+
+    <!--    Time Picker-->
+    <style name="Theme.Time.Picker" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Selected date background /  -->
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorPrimaryVariant">@color/white</item>
+        <!--        Title / Selected date / Switch-to-keyboard / Selected date stroke-->
+        <item name="colorOnPrimary">@color/white</item>
+        <!--  Year selection menu / Month pagination / Current date text and stroke-->
+        <item name="colorOnSurface">@color/main_color</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurfaceVariant">@color/white</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="chipStyle">@style/Widget.App.Chip</item>
+        <item name="materialClockStyle">@style/Widget.App.TimePicker.Clock</item>
+
+    </style>
+
+
+    <style name="Theme.MyTheme.TimePicker" parent="android:Widget.Material.Light.TimePicker">
+        <item name="android:timePickerMode">clock</item>
+        <item name="android:headerBackground">#ff555555</item>
+        <item name="android:numbersTextColor">@color/black</item>
+        <item name="android:numbersInnerTextColor">@color/black</item>
+        <item name="android:numbersSelectorColor">?android:attr/colorControlActivated</item>
+        <item name="android:numbersBackgroundColor">#ff555555</item>
+        <item name="android:amPmTextColor">?android:attr/textColorSecondary</item>
+    </style>
+    <!--    Time Picker-->
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.TimePicker.Display">
+        <item name="android:textColor">@color/time_picker_text_color</item>
+    </style>
+
+    <style name="Widget.App.TimePicker.Clock" parent="Widget.MaterialComponents.TimePicker.Clock">
+        <item name="clockFaceBackgroundColor">@color/main_color</item>
+        <item name="clockHandColor">@color/main_color</item>
+        <item name="clockNumberTextColor">@color/main_color</item>
     </style>
 
 

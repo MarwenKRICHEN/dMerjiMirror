@@ -1,10 +1,8 @@
-package com.example.dmerjimirror.extension
+package com.example.dmerjimirror.library.extension
 
 import android.app.Activity
-import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.core.view.isGone
-import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.example.dmerjimirror.R
 import com.google.android.material.bottomnavigation.BottomNavigationView

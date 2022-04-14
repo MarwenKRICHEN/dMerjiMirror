@@ -7,11 +7,15 @@ import android.view.ViewGroup
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentAddTodoElementBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
+import com.example.dmerjimirror.library.extension.setHour
+import com.example.dmerjimirror.library.extension.setMinute
 import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
-import com.example.dmerjimirror.utils.MaterialTextInput
+import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.timepicker.MaterialTimePicker
+import com.google.android.material.timepicker.TimeFormat
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
@@ -23,7 +27,7 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
     private var todoElement: TodoElement? = null
     private var position: Int? = null
     override var state: Int = BottomSheetBehavior.STATE_COLLAPSED
-    private var simpleDateFormat: SimpleDateFormat? = null
+    private var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -50,6 +54,11 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
         MaterialTextInput.setupClearErrors(view)
         if (todoElement != null) {
             binding.name.editText?.setText(todoElement?.name)
+            binding.todoDeadLine.editText?.setText(todoElement?.deadline?.let {
+                simpleDateFormat.format(
+                    it
+                )
+            })
         }
         binding.header.headerTitle.text = context?.getString(R.string.todo_add_title) ?: ""
         binding.header.cancelButton.setOnClickListener {
@@ -66,11 +75,24 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
                     .build()
 
             activity?.supportFragmentManager?.let { it1 -> datePicker.show(it1, "tag") }
+
             datePicker.addOnPositiveButtonClickListener {
-                simpleDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                val date = simpleDateFormat?.format(it)
-                binding.todoDeadLine.editText?.setText(date)
+                val date = Date(it)
+                val timePicker =
+                    MaterialTimePicker.Builder()
+                        .setTimeFormat(TimeFormat.CLOCK_12H)
+                        .setTitleText("Select deadline time")
+                        .build()
+
+                activity?.supportFragmentManager?.let { it1 -> timePicker.show(it1, "tag1") }
+                timePicker.addOnPositiveButtonClickListener {
+                    date.setHour(timePicker.hour)
+                    date.setMinute(timePicker.minute)
+                    binding.todoDeadLine.editText?.setText(simpleDateFormat.format(date))
+                }
+
             }
+
         }
 
         binding.header.saveButton.setOnClickListener {
