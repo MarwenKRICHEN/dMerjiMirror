@@ -8,7 +8,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class NewsFeedViewModel: ViewModel() {
-    private val myNewsFeed = NewsFeed(0, "Todo List", Component.Position.TOP_CENTER, true, false)
+    private val myNewsFeed = NewsFeed(0, "News Feed", Component.Position.TOP_CENTER, true, false)
 
     private val myFeedList = arrayListOf(
         Feed(0, "BBC", ""),
