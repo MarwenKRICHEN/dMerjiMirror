@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/component_header"
+        layout="@layout/layout_component_detail_header" />
+
+    <TextView
+        android:id="@+id/periodicityLabel"
+        style="@style/Details.TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/pages_padding"
+        android:text="@string/todo.periodicity" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/periodicity"
+        style="@style/MyDropDownListLayout"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/pages_padding"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

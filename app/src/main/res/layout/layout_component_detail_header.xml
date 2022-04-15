@@ -49,8 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="10dp"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+            style="@style/Details.TextStyle"
             android:layout_weight="2"
             android:text="@string/component.detail.enabled" />
 

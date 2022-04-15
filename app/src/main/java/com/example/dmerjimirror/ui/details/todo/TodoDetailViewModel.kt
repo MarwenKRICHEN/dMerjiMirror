@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 
 class TodoDetailViewModel: ViewModel() {
 
-    private val myTodo = Todo(0, "Todo List", Component.Position.TOP_CENTER, true, Todo.Periodicity.DAILY)
+    private val myTodo = Todo(0, "Todo List", Component.Position.TOP_CENTER, true, Todo.Periodicity.MONTHLY)
 
     private val myTodoList = arrayListOf(
         TodoElement(0, "Pet the dog", Date(), false),

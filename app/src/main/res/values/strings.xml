@@ -84,8 +84,15 @@
 
     <!--    Components Detail-->
     <string name="component.detail.enabled">Enabled</string>
+
+    <!--    TodoComponent Detail-->
+    <string name="todo.periodicity">Periodicity</string>
     <string name="todo.add">+ Todos</string>
     <string name="todo.add.title">Add Todo</string>
+    <string name="todo.add.periodicity.daily">Daily</string>
+    <string name="todo.add.periodicity.weekly">Weekly</string>
+    <string name="todo.add.periodicity.monthly">Monthly</string>
+    <string name="todo.add.periodicity.all">All</string>
 
     <!--    TodoElement-->
     <string name="todo.element.name">Name</string>
@@ -93,5 +100,21 @@
     <string name="todo.element.deadline">DeadLine</string>
     <string name="todo.element.deleted">todo "%1$s" has been deleted</string>
 
+    <!--    News Feed Detail-->
+    <string name="news.feed.show.description">Show news description</string>
+    <string name="news.feed.add">+ Provider</string>
+    <string name="news.feed.add.title">Add provider</string>
+
+    <!--    Weather Detail-->
+    <string name="weather.location">Location</string>
+    <string name="weather.forecast.number.days">Number of days</string>
+    <string name="weather.forecast.enable.colors">Enable colors</string>
+
+    <!--    Clock Detail-->
+    <string name="clock.time.zone">Time Zone</string>
+    <string name="clock.digital.mode">Digital Mode</string>
+
+    <!--    Calendar Detail-->
+    <string name="calendar.country">Country</string>
 
 </resources>

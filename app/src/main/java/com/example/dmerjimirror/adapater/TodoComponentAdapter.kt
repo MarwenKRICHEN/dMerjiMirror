@@ -10,6 +10,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.library.model.Todo
 import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
@@ -18,6 +19,7 @@ import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -50,7 +52,7 @@ class TodoComponentAdapter(
             Items.COMPONENT_HEADER -> {
                 val view = LayoutInflater
                     .from(viewGroup.context)
-                    .inflate(R.layout.layout_component_detail_header, viewGroup, false)
+                    .inflate(R.layout.layout_todo_header, viewGroup, false)
                 return ViewHolderComponentHeader(view)
             }
             Items.TODO -> {
@@ -87,12 +89,19 @@ class TodoComponentAdapter(
         private val image: ImageView? = itemView.findViewById(R.id.component_image)
         private val enabledSwitch: SwitchMaterial? =
             itemView.findViewById(R.id.componentEnabledSwitch)
+        private val periodicityDropList: TextInputLayout? = itemView.findViewById(R.id.periodicity)
 
         override fun bindType(item: Items) {
             (item as ComponentHeader?)?.apply {
                 name?.text = this.component.name
                 enabledSwitch?.isChecked = this.component.active
                 image?.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.todo_list))
+                val items = listOf("Daily", "Monthly", "Yearly", "All")
+                val adapter = ArrayAdapter(context, R.layout.drop_down_list_item, items)
+                (periodicityDropList?.editText as? AutoCompleteTextView)?.let {
+                    it.setAdapter(adapter)
+                    it.setText(adapter.getItem(this.component.periodicity).toString(), false)
+                }
             }
         }
 
