@@ -18,20 +18,24 @@
         <action
             android:id="@+id/action_navigation_components_to_todoDetailFragment"
             app:destination="@id/todoDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_newsFeedDetailFragment"
+            app:destination="@id/newsFeedDetailFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.dmerjimirror.ui.main.settings.SettingsFragment"
         android:label="@string/global.settings"
-        tools:layout="@layout/fragment_settings" >
-        <action
-            android:id="@+id/action_navigation_settings_to_todoDetailFragment"
-            app:destination="@id/todoDetailFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/todoDetailFragment"
         android:name="com.example.dmerjimirror.ui.details.todo.TodoElementDetailFragment"
         android:label="@string/component.todo.list"
-        tools:layout="@layout/fragment_todo_detail" />
+        tools:layout="@layout/fragment_component_recycler_detail" />
+    <fragment
+        android:id="@+id/newsFeedDetailFragment"
+        android:name="com.example.dmerjimirror.ui.details.newsfeed.NewsFeedDetailFragment"
+        android:label="@string/component.news.feed"
+        tools:layout="@layout/fragment_component_recycler_detail" />
 </navigation>

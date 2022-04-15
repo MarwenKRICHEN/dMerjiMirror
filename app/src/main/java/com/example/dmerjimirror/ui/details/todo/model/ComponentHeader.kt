@@ -4,7 +4,7 @@ import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.library.model.Todo
 
 
-class ComponentHeader(val component: Todo): Items {
+class ComponentHeader(val component: Component): Items {
 
     override fun listItemType(): Int {
         return Items.COMPONENT_HEADER

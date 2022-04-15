@@ -7,5 +7,6 @@ interface Items {
         const val COMPONENT_HEADER = 0
         const val HEADER = 1
         const val TODO = 2
+        const val FEEDS = 3
     }
 }

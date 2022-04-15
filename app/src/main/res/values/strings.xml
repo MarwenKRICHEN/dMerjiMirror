@@ -12,6 +12,7 @@
     <string name="global.done">done</string>
     <string name="global.add">Add</string>
     <string name="global.undo">Undo</string>
+    <string name="global.select">Select</string>
 
     <!--    User-->
     <string name="user.full.name">Full name</string>
@@ -105,6 +106,10 @@
     <string name="news.feed.add">+ Provider</string>
     <string name="news.feed.add.title">Add provider</string>
 
+    <!--    Feed-->
+    <string name="feed.deleted">feed "%1$s" has been deleted</string>
+    <string name="feed.select.provider">Select news feed provider</string>
+
     <!--    Weather Detail-->
     <string name="weather.location">Location</string>
     <string name="weather.forecast.number.days">Number of days</string>
@@ -117,4 +122,6 @@
     <!--    Calendar Detail-->
     <string name="calendar.country">Country</string>
 
+    <!--    Error-->
+    <string name="error.field.not.empty">This fields cannot be empty</string>
 </resources>

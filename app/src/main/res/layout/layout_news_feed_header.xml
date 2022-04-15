@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/component_header"
+        layout="@layout/layout_component_detail_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/pages_padding">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="10dp"
+            style="@style/Details.TextStyle"
+            android:layout_weight="2"
+            android:text="@string/news.feed.show.description" />
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/showDescriptionSwitch"
+            style="@style/Settings.Switch.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <com.google.android.material.divider.MaterialDivider
+        style="@style/Settings.Divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

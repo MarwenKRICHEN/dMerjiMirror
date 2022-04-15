@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.adapater.LargeComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentsBinding
 import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.library.utils.DirectionAdapter
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
@@ -57,10 +58,7 @@ class ComponentsFragment : Fragment(), RecyclerItemNavigation {
     }
 
     override fun onItemClick(component: Component) {
-        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
-        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
-        val action = ComponentsFragmentDirections.actionNavigationComponentsToTodoDetailFragment()
-        findNavController().navigate(action)
+        DirectionAdapter(component).navigate(this)
     }
 
     override fun onDestroyView() {

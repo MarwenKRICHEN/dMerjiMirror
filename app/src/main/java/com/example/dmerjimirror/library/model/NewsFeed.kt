@@ -6,4 +6,6 @@ class NewsFeed(
     position: String,
     active: Boolean,
     val showDescription: Boolean
-) : Component(id, name, position, active)
+) : Component(id, name, position, active) {
+    constructor(): this(0, "", "", false, true)
+}

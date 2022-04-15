@@ -8,16 +8,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
@@ -26,27 +22,20 @@ import kotlin.collections.ArrayList
 
 
 class TodoComponentAdapter(
-    val context: Context,
-    val activity: Activity,
-    private val items: ArrayList<Items>,
+    context: Context,
+    activity: Activity,
+    items: ArrayList<Items>,
     private val showAddTodoListener: View.OnClickListener,
     private val todoElementListener: TodoElementListener,
 ) :
-    RecyclerView.Adapter<ViewHolder>() {
-
-    private var lastRemovedItem: Items? = null
-    private var lastRemovedItemIndex: Int? = null
-
-    override fun getItemViewType(position: Int): Int {
-        return items[position].listItemType()
-    }
+    ComponentAdapter(context, activity, items) {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): ViewHolder {
         when (type) {
             Items.HEADER -> {
                 val view = LayoutInflater
                     .from(viewGroup.context)
-                    .inflate(R.layout.layout_add_todo_header, viewGroup, false)
+                    .inflate(R.layout.layout_add_element_header, viewGroup, false)
                 return ViewHolderAddTodoHeader(view)
             }
             Items.COMPONENT_HEADER -> {
@@ -65,23 +54,10 @@ class TodoComponentAdapter(
             else -> {
                 val view = LayoutInflater
                     .from(viewGroup.context)
-                    .inflate(R.layout.layout_add_todo_header, viewGroup, false)
+                    .inflate(R.layout.layout_add_element_header, viewGroup, false)
                 return ViewHolderAddTodoHeader(view)
             }
         }
-    }
-
-    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, pos: Int) {
-        val item = items[pos]
-        (viewHolder as ViewHolder?)?.bindType(item)
-    }
-
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
-    abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        abstract fun bindType(item: Items)
     }
 
     inner class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
@@ -100,7 +76,7 @@ class TodoComponentAdapter(
                 val adapter = ArrayAdapter(context, R.layout.drop_down_list_item, items)
                 (periodicityDropList?.editText as? AutoCompleteTextView)?.let {
                     it.setAdapter(adapter)
-                    it.setText(adapter.getItem(this.component.periodicity).toString(), false)
+                    it.setText(adapter.getItem((this.component as Todo?)?.periodicity ?: 0).toString(), false)
                 }
             }
         }
@@ -108,9 +84,9 @@ class TodoComponentAdapter(
     }
 
     inner class ViewHolderAddTodoHeader(itemView: View) : ViewHolder(itemView) {
-        private val addTodoButton: Button? = itemView.findViewById(R.id.addTodoButton)
+        private val addTodoButton: Button? = itemView.findViewById(R.id.addElementButton)
         override fun bindType(item: Items) {
-
+            addTodoButton?.setText(R.string.todo_add)
         }
 
         init {
@@ -164,49 +140,6 @@ class TodoComponentAdapter(
         notifyItemChanged(position)
     }
 
-    fun deleteTodoItem(position: Int) {
-        lastRemovedItemIndex = position
-        try {
-            lastRemovedItem = items[position]
-        } catch (e: IndexOutOfBoundsException) {
-            lastRemovedItem = null
-            lastRemovedItemIndex = null
-        }
-        items.removeAt(position)
-        notifyItemRemoved(position)
-        showUndoSnackbar()
-    }
 
-    private fun showUndoSnackbar() {
-        val view = activity.findViewById<View>(R.id.contentMain)
-        val snackbar: Snackbar = Snackbar.make(
-            view,
-            context.getString(
-                R.string.todo_element_deleted,
-                (lastRemovedItem as TodoItem?)?.todo?.name
-            ),
-            Snackbar.LENGTH_LONG
-        )
-        snackbar.setAction(R.string.global_undo) { undoDelete() }
-        snackbar.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                // TODO: delete from DB
-//                deleteItem((lastRemovedItem as TodoItem?)?.todo?.id)
-            }
-        })
-        snackbar.show()
-    }
-
-    private fun undoDelete() {
-        lastRemovedItemIndex?.let { index ->
-            lastRemovedItem?.let { item ->
-                items.add(index, item)
-                notifyItemInserted(index)
-                lastRemovedItemIndex = null
-                lastRemovedItem = null
-            }
-        }
-
-    }
 
 }

@@ -100,11 +100,11 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
             val dateString = binding.todoDeadLine.editText?.text?.toString() ?: ""
             var error = false
             if (name == "") {
-                binding.name.error = "This fields cannot be empty"
+                binding.name.error = getString(R.string.error_field_not_empty)
                 error = true
             }
             if (dateString == "") {
-                binding.todoDeadLine.error = "This fields cannot be empty"
+                binding.todoDeadLine.error = getString(R.string.error_field_not_empty)
                 error = true
             }
             if (!error) {

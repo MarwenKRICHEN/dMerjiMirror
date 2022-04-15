@@ -1,13 +1,9 @@
-package com.example.dmerjimirror.ui.details.todo
+package com.example.dmerjimirror.ui.details.newsfeed
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -16,27 +12,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.adapater.NewsFeedComponentAdapter
 import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
+import com.example.dmerjimirror.library.model.Feed
+import com.example.dmerjimirror.library.model.NewsFeed
 import com.example.dmerjimirror.library.model.Todo
 import com.example.dmerjimirror.library.model.TodoElement
 import com.example.dmerjimirror.library.utils.SwipeToDeleteHelper
-import com.example.dmerjimirror.listener.TodoElementListener
+import com.example.dmerjimirror.listener.FeedListener
+import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
+import com.example.dmerjimirror.ui.details.todo.AddTodoElementFragment
+import com.example.dmerjimirror.ui.details.todo.TodoDetailViewModel
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoAddHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.transition.MaterialSharedAxis
 
-
-class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementListener {
+class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
     private var _binding: FragmentComponentRecyclerDetailBinding? = null
     private lateinit var mRecyclerView: RecyclerView
-    private lateinit var todoDetailViewModel: TodoDetailViewModel
+    private lateinit var newsFeedViewModel: NewsFeedViewModel
 
-    private var todo: Todo? = null
-    private var todoList: ArrayList<TodoElement>? = null
+    private var newsFeed: NewsFeed? = null
+    private var feedList: ArrayList<Feed>? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -48,8 +49,8 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
         savedInstanceState: Bundle?
     ): View {
 
-        todoDetailViewModel =
-            ViewModelProvider(this)[TodoDetailViewModel::class.java]
+        newsFeedViewModel =
+            ViewModelProvider(this)[NewsFeedViewModel::class.java]
 
         _binding = FragmentComponentRecyclerDetailBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -64,24 +65,23 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         mRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        todo = todoDetailViewModel.component.value
-        todoList = todoDetailViewModel.todoList.value
+        newsFeed = newsFeedViewModel.component.value
+        feedList = newsFeedViewModel.feedList.value
 
-        mRecyclerView.adapter = TodoComponentAdapter(
+        mRecyclerView.adapter = NewsFeedComponentAdapter(
             requireContext(),
             requireActivity(),
             arrayListOf(
-                ComponentHeader(todo ?: Todo()),
+                ComponentHeader(newsFeed ?: NewsFeed()),
                 TodoAddHeader(),
             ),
-            this,
             this
         )
-        val todoItems = ArrayList<TodoItem>()
-        for (todo in todoList ?: ArrayList()) {
-            todoItems.add(TodoItem(todo))
+        val feedItems = ArrayList<FeedItem>()
+        for (feed in feedList ?: ArrayList()) {
+            feedItems.add(FeedItem(feed))
         }
-        (mRecyclerView.adapter as TodoComponentAdapter?)?.addTodoItems(todoItems)
+        (mRecyclerView.adapter as NewsFeedComponentAdapter?)?.addFeedItems(feedItems)
         setupSwipeGesture()
 
 
@@ -92,36 +92,21 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
     // show add TodoElement
     override fun onClick(p0: View?) {
         activity?.supportFragmentManager?.let {
-            AddTodoElementFragment.newInstance(this).apply {
+            AddFeedFragment.newInstance(this).apply {
                 show(it, tag)
             }
         }
     }
 
-    override fun addTodo(todoElement: TodoElement) {
-        (mRecyclerView.adapter as TodoComponentAdapter?)?.addTodoItem(TodoItem(todoElement))
-    }
-
-    override fun showUpdateTodo(todoElement: TodoElement, position: Int) {
-        activity?.supportFragmentManager?.let {
-            AddTodoElementFragment.newInstance(this, todoElement, position).apply {
-                show(it, tag)
-            }
-        }
-    }
-
-    override fun updateTodo(todoElement: TodoElement, position: Int) {
-        (mRecyclerView.adapter as TodoComponentAdapter?)?.updateTodoItem(
-            TodoItem(todoElement),
-            position
-        )
+    override fun addFeed(feed: Feed) {
+        (mRecyclerView.adapter as NewsFeedComponentAdapter?)?.addFeedItem(FeedItem(feed))
     }
 
     private fun setupSwipeGesture() {
         val simpleCallback = SwipeToDeleteHelper(requireContext()) { position ->
-            (mRecyclerView.adapter as TodoComponentAdapter?)?.deleteItem(
+            (mRecyclerView.adapter as NewsFeedComponentAdapter?)?.deleteItem(
                 position,
-                R.string.todo_element_deleted
+                R.string.feed_deleted
             ) {
                 // TODO: delete from DB
 //                deleteItem((lastRemovedItem as TodoItem?)?.todo?.id)

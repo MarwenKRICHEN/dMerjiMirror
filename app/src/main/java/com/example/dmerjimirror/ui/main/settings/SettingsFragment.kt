@@ -63,8 +63,6 @@ class SettingsFragment : Fragment() {
         }
 
         binding.signOut.setOnClickListener {
-            val action = SettingsFragmentDirections.actionNavigationSettingsToTodoDetailFragment()
-            findNavController().navigate(action)
         }
 
         notificationsViewModel.text.observe(viewLifecycleOwner) {
