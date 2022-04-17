@@ -11,8 +11,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.adapater.LargeComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentsBinding
+import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.Component
 import com.example.dmerjimirror.library.utils.DirectionAdapter
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
@@ -35,7 +37,7 @@ class ComponentsFragment : Fragment(), RecyclerItemNavigation {
     ): View {
         val componentsViewModel =
             ViewModelProvider(this)[ComponentsViewModel::class.java]
-
+        (activity as MainActivity?)?.navView?.makeVisible()
         _binding = FragmentComponentsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

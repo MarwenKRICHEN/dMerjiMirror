@@ -21,6 +21,21 @@
         <action
             android:id="@+id/action_navigation_components_to_newsFeedDetailFragment"
             app:destination="@id/newsFeedDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_clockFragment"
+            app:destination="@id/clockFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_complimentFragment"
+            app:destination="@id/complimentFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+        <action
+            android:id="@+id/action_navigation_components_to_weatherForecastFragment"
+            app:destination="@id/weatherForecastFragment" />
     </fragment>
 
     <fragment
@@ -38,4 +53,29 @@
         android:name="com.example.dmerjimirror.ui.details.newsfeed.NewsFeedDetailFragment"
         android:label="@string/component.news.feed"
         tools:layout="@layout/fragment_component_recycler_detail" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.dmerjimirror.ui.details.calendar.CalendarFragment"
+        android:label="@string/component.calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/clockFragment"
+        android:name="com.example.dmerjimirror.ui.details.clock.ClockFragment"
+        android:label="@string/component.clock"
+        tools:layout="@layout/fragment_clock" />
+    <fragment
+        android:id="@+id/complimentFragment"
+        android:name="com.example.dmerjimirror.ui.details.compliment.ComplimentFragment"
+        android:label="@string/component.compliment"
+        tools:layout="@layout/fragment_compliment" />
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.example.dmerjimirror.ui.details.weather.WeatherFragment"
+        android:label="@string/component.weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/weatherForecastFragment"
+        android:name="com.example.dmerjimirror.ui.details.weather_forecast.WeatherForecastFragment"
+        android:label="@string/component.weather.forecast"
+        tools:layout="@layout/fragment_weather_forecast" />
 </navigation>

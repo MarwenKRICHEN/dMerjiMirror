@@ -25,8 +25,12 @@
         <entry key="app/src/main/res/layout/drop_down_list_itm.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_add_feed.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_add_todo_element.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_calebdar.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_calendar.xml" value="0.12993920972644377" />
         <entry key="app/src/main/res/layout/fragment_change_email.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_change_password.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_clock.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_compliment.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_components.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.121875" />
         <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.24003623188405798" />
@@ -36,6 +40,8 @@
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_todo_detail.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_weather.xml" value="0.12993920972644377" />
+        <entry key="app/src/main/res/layout/fragment_weather_forecast.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_add_element_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_add_todo_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_calendar_header.xml" value="0.24003623188405798" />
@@ -43,9 +49,11 @@
         <entry key="app/src/main/res/layout/layout_component_large.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_small.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_feed.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_news_feed_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_settings_edit_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_todo_element.xml" value="0.27207641601562504" />
         <entry key="app/src/main/res/layout/layout_todo_header.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_weather_details.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15462962962962962" />
       </map>
     </option>

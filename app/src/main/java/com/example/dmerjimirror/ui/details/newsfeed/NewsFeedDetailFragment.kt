@@ -116,13 +116,7 @@ class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
-    override fun onPause() {
-        (activity as MainActivity?)?.navView?.makeVisible()
-        super.onPause()
-    }
-
     override fun onDestroyView() {
-        (activity as MainActivity?)?.navView?.makeVisible()
         super.onDestroyView()
         _binding = null
     }

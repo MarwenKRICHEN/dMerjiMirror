@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.details.weather.WeatherFragment"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/component_header"
+        layout="@layout/layout_component_detail_header" />
+
+    <TextView
+        style="@style/Details.TextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/pages_padding"
+        android:text="@string/weather.location" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/location"
+        style="@style/MyTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/pages_padding"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

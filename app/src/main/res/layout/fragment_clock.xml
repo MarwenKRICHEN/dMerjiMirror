@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionGroup="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.details.clock.ClockFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/component_header"
+            layout="@layout/layout_component_detail_header" />
+
+
+        <TextView
+            style="@style/Details.TextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/pages_padding"
+            android:text="@string/clock.time.zone" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/timeZone"
+            style="@style/MyTextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/pages_padding">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:padding="@dimen/pages_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                style="@style/Details.TextStyle"
+                android:layout_weight="2"
+                android:text="@string/clock.digital.mode" />
+
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/digitalModeSwitch"
+                style="@style/Settings.Switch.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <com.google.android.material.divider.MaterialDivider
+            style="@style/Settings.Divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</ScrollView>
