@@ -26,15 +26,16 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/timeZone"
-            style="@style/MyTextInputLayout"
+            style="@style/MyDropDownListLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/pages_padding">
+            android:layout_marginHorizontal="@dimen/pages_padding"
+            android:layout_height="wrap_content">
 
-            <EditText
+            <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:padding="10dp"
+                android:inputType="textAutoComplete" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

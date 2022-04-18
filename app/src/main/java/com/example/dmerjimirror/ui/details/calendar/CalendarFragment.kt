@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -55,7 +57,12 @@ class CalendarFragment : Fragment() {
                     R.drawable.calendar
                 )
             )
-            binding.country.editText?.setText(it.country)
+            val items = Calendar.countries
+            val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, items)
+            (binding.country.editText as? AutoCompleteTextView)?.let { it1 ->
+                it1.setAdapter(adapter)
+                it1.setText(it.country)
+            }
         })
 
 

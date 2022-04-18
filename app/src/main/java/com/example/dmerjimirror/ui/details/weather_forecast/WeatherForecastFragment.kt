@@ -55,6 +55,19 @@ class WeatherForecastFragment : Fragment() {
             binding.enableColorSwitch.isChecked = it.colored
         })
 
+        var stepperNb = binding.numberOfDays.text.toString().toInt()
+        binding.stepperPlus.setOnClickListener {
+            if (stepperNb < 12)
+                stepperNb++
+            binding.numberOfDays.text = stepperNb.toString()
+        }
+
+        binding.stepperMinus.setOnClickListener {
+            if (stepperNb > 1)
+                stepperNb--
+            binding.numberOfDays.text = stepperNb.toString()
+        }
+
 
         return root
     }
