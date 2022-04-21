@@ -1,9 +1,16 @@
 package com.example.dmerjimirror.library.model.response
 
-class Todo(id: Int, name: String, position: String, active: Boolean, var periodicity: Int) :
+class Todo(
+    id: Int,
+    name: String,
+    position: String,
+    active: Boolean,
+    var periodicity: Int,
+    val list: ArrayList<TodoElement>? = null
+) :
     Component(id, name, position, active) {
 
-    constructor(): this(0, "", "", false, 0)
+    constructor() : this(0, "", "", false, 0)
 
     class Periodicity {
         companion object {
