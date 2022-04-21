@@ -27,8 +27,8 @@ interface NewsFeedAPI {
     }
 
     @GET("private/getnewsfeed")
-    fun getWeather(@Query("userid") userId: Int): Call<NewsFeed>
+    fun getNewsFeed(@Query("userid") userId: Int): Call<NewsFeed>
 
     @PUT("private/updatenewsfeed")
-    fun updateWeather(@Body newsFeed: NewsFeed): Call<NewsFeed>
+    fun updateNewsFeed(@Body newsFeed: NewsFeed): Call<NewsFeed>
 }
