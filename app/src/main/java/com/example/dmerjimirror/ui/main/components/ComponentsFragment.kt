@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +14,10 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.adapater.LargeComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentsBinding
 import com.example.dmerjimirror.library.extension.makeVisible
-import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.utils.DirectionAdapter
 import com.example.dmerjimirror.listener.RecyclerItemNavigation
 import com.google.android.material.transition.MaterialFadeThrough
-import com.google.android.material.transition.MaterialSharedAxis
 
 class ComponentsFragment : Fragment(), RecyclerItemNavigation {
 

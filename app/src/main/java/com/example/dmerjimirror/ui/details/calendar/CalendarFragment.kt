@@ -8,20 +8,13 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentCalendarBinding
-import com.example.dmerjimirror.databinding.FragmentClockBinding
 import com.example.dmerjimirror.library.extension.makeGone
-import com.example.dmerjimirror.library.model.Calendar
-import com.example.dmerjimirror.library.model.Clock
-import com.example.dmerjimirror.library.model.Component
-import com.example.dmerjimirror.ui.details.clock.ClockViewModel
-import com.google.android.material.transition.MaterialFadeThrough
+import com.example.dmerjimirror.library.model.response.Calendar
 import com.google.android.material.transition.MaterialSharedAxis
 
 class CalendarFragment : Fragment() {

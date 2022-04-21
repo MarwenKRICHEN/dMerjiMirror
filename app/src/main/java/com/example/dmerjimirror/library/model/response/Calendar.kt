@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 class Calendar(
     id: Int,

@@ -17,7 +17,7 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentOverviewBinding
-import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.library.model.response.Component
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 

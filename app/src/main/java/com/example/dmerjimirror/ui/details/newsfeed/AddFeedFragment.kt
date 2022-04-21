@@ -8,24 +8,11 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentAddFeedBinding
-import com.example.dmerjimirror.databinding.FragmentAddTodoElementBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
-import com.example.dmerjimirror.library.extension.setHour
-import com.example.dmerjimirror.library.extension.setMinute
-import com.example.dmerjimirror.library.model.Feed
-import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.example.dmerjimirror.listener.FeedListener
-import com.example.dmerjimirror.listener.TodoElementListener
-import com.example.dmerjimirror.ui.details.todo.AddTodoElementFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.timepicker.MaterialTimePicker
-import com.google.android.material.timepicker.TimeFormat
-import java.lang.Exception
-import java.text.SimpleDateFormat
-import java.util.*
 
 class AddFeedFragment : RoundedBottomSheetDialogFragment() {
 

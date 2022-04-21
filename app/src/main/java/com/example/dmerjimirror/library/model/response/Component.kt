@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 open class Component(val id: Int, val name: String, var position: String, var active: Boolean) {
     constructor() : this(0, "", "", true)
@@ -57,7 +57,7 @@ open class Component(val id: Int, val name: String, var position: String, var ac
                 4 -> Position.MIDDLE_CENTER
                 5 -> Position.MIDDLE_RIGHT
 
-                else -> Component.Position.TOP_LEFT
+                else -> Position.TOP_LEFT
             }
         }
 

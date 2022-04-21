@@ -1,6 +1,6 @@
 package com.example.dmerjimirror.listener
 
-import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.library.model.response.TodoElement
 import java.io.Serializable
 
 interface TodoElementListener: Serializable {

@@ -1,12 +1,12 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 class Clock(
     id: Int,
     name: String,
     position: String,
     active: Boolean,
-    val timeZone: String,
-    val isDigital: Boolean
+    val timezone: String,
+    val isdigital: Boolean
 ) : Component(id, name, position, active) {
     companion object {
         val timeZones = arrayListOf(

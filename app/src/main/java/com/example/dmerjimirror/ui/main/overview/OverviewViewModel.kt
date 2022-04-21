@@ -3,7 +3,7 @@ package com.example.dmerjimirror.ui.main.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.library.model.response.Component
 
 class OverviewViewModel : ViewModel() {
 

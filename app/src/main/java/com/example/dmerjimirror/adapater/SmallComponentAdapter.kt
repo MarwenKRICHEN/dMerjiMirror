@@ -9,8 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
-import com.example.dmerjimirror.library.model.Component
-import com.example.dmerjimirror.listener.RecyclerItemNavigation
+import com.example.dmerjimirror.library.model.response.Component
 import com.google.android.material.card.MaterialCardView
 import java.lang.Exception
 

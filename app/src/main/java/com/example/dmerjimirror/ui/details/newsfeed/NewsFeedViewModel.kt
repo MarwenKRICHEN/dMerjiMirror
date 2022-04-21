@@ -3,8 +3,9 @@ package com.example.dmerjimirror.ui.details.newsfeed
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmerjimirror.library.model.*
-import java.util.*
+import com.example.dmerjimirror.library.model.response.Component
+import com.example.dmerjimirror.library.model.response.Feed
+import com.example.dmerjimirror.library.model.response.NewsFeed
 import kotlin.collections.ArrayList
 
 class NewsFeedViewModel: ViewModel() {

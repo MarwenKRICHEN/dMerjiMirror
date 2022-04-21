@@ -8,15 +8,11 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import com.example.dmerjimirror.R
-import com.example.dmerjimirror.library.model.Feed
-import com.example.dmerjimirror.library.model.NewsFeed
+import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items
-import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.switchmaterial.SwitchMaterial
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class NewsFeedComponentAdapter(
@@ -75,7 +71,7 @@ class NewsFeedComponentAdapter(
                     )
                 )
                 showDescriptionSwitch?.isChecked =
-                    (this.component as NewsFeed?)?.showDescription ?: false
+                    (this.component as NewsFeed?)?.showdescription ?: false
             }
         }
 

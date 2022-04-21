@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 class WeatherForecast(
     id: Int,
@@ -6,6 +6,6 @@ class WeatherForecast(
     position: String,
     active: Boolean,
     location: String,
-    val numberOfDays: Int,
+    val numberofdays: Int,
     val colored: Boolean
 ) : Weather(id, name, position, active, location)

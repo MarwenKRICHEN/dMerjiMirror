@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 data class User(
     val id: Int,
@@ -7,6 +7,6 @@ data class User(
     val email: String,
     val password: String,
     val avatar: String,
-    val timeFormat: Int,
+    val timeformat: Int,
     val unit: Int
 )

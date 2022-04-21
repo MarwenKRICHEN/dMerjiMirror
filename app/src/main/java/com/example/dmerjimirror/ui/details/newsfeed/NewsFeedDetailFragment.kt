@@ -13,22 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.NewsFeedComponentAdapter
-import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
 import com.example.dmerjimirror.library.extension.makeGone
-import com.example.dmerjimirror.library.extension.makeVisible
-import com.example.dmerjimirror.library.model.Feed
-import com.example.dmerjimirror.library.model.NewsFeed
-import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.library.model.response.Feed
+import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.utils.SwipeToDeleteHelper
 import com.example.dmerjimirror.listener.FeedListener
 import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
-import com.example.dmerjimirror.ui.details.todo.AddTodoElementFragment
-import com.example.dmerjimirror.ui.details.todo.TodoDetailViewModel
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoAddHeader
-import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.transition.MaterialSharedAxis
 
 class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {

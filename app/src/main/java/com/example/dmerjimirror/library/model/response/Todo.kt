@@ -1,4 +1,4 @@
-package com.example.dmerjimirror.library.model
+package com.example.dmerjimirror.library.model.response
 
 class Todo(id: Int, name: String, position: String, active: Boolean, var periodicity: Int) :
     Component(id, name, position, active) {

@@ -3,8 +3,8 @@ package com.example.dmerjimirror.ui.details.calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmerjimirror.library.model.Calendar
-import com.example.dmerjimirror.library.model.Component
+import com.example.dmerjimirror.library.model.response.Calendar
+import com.example.dmerjimirror.library.model.response.Component
 
 class CalendarViewModel : ViewModel() {
 

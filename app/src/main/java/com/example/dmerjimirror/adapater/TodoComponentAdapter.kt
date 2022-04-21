@@ -9,7 +9,7 @@ import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
-import com.example.dmerjimirror.library.model.Todo
+import com.example.dmerjimirror.library.model.response.Todo
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items

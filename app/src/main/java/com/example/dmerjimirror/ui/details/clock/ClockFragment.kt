@@ -13,12 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentClockBinding
-import com.example.dmerjimirror.databinding.FragmentWeatherBinding
 import com.example.dmerjimirror.library.extension.makeGone
-import com.example.dmerjimirror.library.model.Clock
-import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.ui.details.weather_forecast.WeatherForecastViewModel
-import com.google.android.material.transition.MaterialFadeThrough
+import com.example.dmerjimirror.library.model.response.Clock
 import com.google.android.material.transition.MaterialSharedAxis
 
 class ClockFragment : Fragment() {
@@ -54,12 +50,12 @@ class ClockFragment : Fragment() {
                     R.drawable.clock
                 )
             )
-            binding.digitalModeSwitch.isChecked = it.isDigital
+            binding.digitalModeSwitch.isChecked = it.isdigital
             val items = Clock.timeZones
             val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, items)
             (binding.timeZone.editText as? AutoCompleteTextView)?.let { it1 ->
                 it1.setAdapter(adapter)
-                it1.setText(it.timeZone)
+                it1.setText(it.timezone)
             }
         })
 

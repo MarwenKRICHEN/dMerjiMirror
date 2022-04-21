@@ -51,7 +51,7 @@ class WeatherForecastFragment : Fragment() {
                 )
             )
             binding.weatherLayout.location.editText?.setText(it.location)
-            binding.numberOfDays.text = it.numberOfDays.toString()
+            binding.numberOfDays.text = it.numberofdays.toString()
             binding.enableColorSwitch.isChecked = it.colored
         })
 

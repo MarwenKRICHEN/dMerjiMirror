@@ -1,13 +1,9 @@
 package com.example.dmerjimirror.ui.details.todo
 
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -20,8 +16,8 @@ import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
-import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.library.model.response.Todo
+import com.example.dmerjimirror.library.model.response.TodoElement
 import com.example.dmerjimirror.library.utils.SwipeToDeleteHelper
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader

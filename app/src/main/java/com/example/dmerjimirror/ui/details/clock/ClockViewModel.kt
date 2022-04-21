@@ -3,9 +3,8 @@ package com.example.dmerjimirror.ui.details.clock
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.dmerjimirror.library.model.Clock
-import com.example.dmerjimirror.library.model.Component
-import com.example.dmerjimirror.library.model.Weather
+import com.example.dmerjimirror.library.model.response.Clock
+import com.example.dmerjimirror.library.model.response.Component
 
 class ClockViewModel : ViewModel() {
 

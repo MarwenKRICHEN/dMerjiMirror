@@ -2,10 +2,7 @@ package com.example.dmerjimirror.library.utils
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.dmerjimirror.library.model.Component
-import com.example.dmerjimirror.library.model.NewsFeed
-import com.example.dmerjimirror.library.model.Todo
-import com.example.dmerjimirror.ui.main.components.ComponentsFragment
+import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.ui.main.components.ComponentsFragmentDirections
 import com.google.android.material.transition.MaterialSharedAxis
 

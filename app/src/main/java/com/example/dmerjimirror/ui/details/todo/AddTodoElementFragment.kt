@@ -9,7 +9,7 @@ import com.example.dmerjimirror.databinding.FragmentAddTodoElementBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
 import com.example.dmerjimirror.library.extension.setHour
 import com.example.dmerjimirror.library.extension.setMinute
-import com.example.dmerjimirror.library.model.TodoElement
+import com.example.dmerjimirror.library.model.response.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
 import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -112,7 +112,7 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
                     val date = simpleDateFormat?.parse(dateString)
                     if (date != null) {
                         if (todoElement == null)
-                            elementListener?.addTodo(TodoElement(-1, name, date, false))
+                            elementListener?.addTodo(TodoElement(-1, name, date, false, 12))
                         else
                             if (position != null)
                                 elementListener?.updateTodo(
@@ -120,7 +120,8 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
                                         todoElement?.id ?: -1,
                                         name,
                                         date,
-                                        todoElement?.done ?: false
+                                        todoElement?.done ?: false,
+                                        12
                                     ),
                                     position!!
                                 )
