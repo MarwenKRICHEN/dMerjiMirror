@@ -5,6 +5,7 @@ import com.example.dmerjimirror.library.api.UserAPI
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.update.*
+import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
@@ -90,6 +91,27 @@ class UserController {
         fun updateUnit(profile: UserUpdateUnit, callback: (User?, Throwable?) -> Unit) {
             val apiCall = UserAPI.create().updateUnit(profile)
             update(apiCall, callback)
+        }
+
+        fun getComponents(userId: Int, callback: (ArrayList<Component>?, Throwable?) -> Unit) {
+            val apiCall = UserAPI.create().getComponents(userId)
+            apiCall.enqueue(object : Callback<ArrayList<Component>>{
+                override fun onResponse(
+                    call: Call<ArrayList<Component>>,
+                    response: Response<ArrayList<Component>>
+                ) {
+                    response.body()?.let {
+                        callback(it, null)
+                    } ?: run {
+                        callback(null, Throwable(response.errorBody()?.string()))
+                    }
+                }
+
+                override fun onFailure(call: Call<ArrayList<Component>>, t: Throwable) {
+                    callback(null, t)
+                }
+
+            })
         }
 
     }

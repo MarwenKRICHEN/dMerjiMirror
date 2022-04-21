@@ -3,15 +3,14 @@ package com.example.dmerjimirror.library.api
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.update.*
+import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.utils.Constants
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Body
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 interface UserAPI {
     companion object {
@@ -48,5 +47,8 @@ interface UserAPI {
 
     @PUT("private/editprofile")
     fun updateUnit(@Body profile: UserUpdateUnit): Call<User>
+
+    @GET("private/editprofile")
+    fun getComponents(@Query("userid") userId: Int): Call<ArrayList<Component>>
 }
 
