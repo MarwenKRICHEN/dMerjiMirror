@@ -48,7 +48,7 @@ interface UserAPI {
     @PUT("private/editprofile")
     fun updateUnit(@Body profile: UserUpdateUnit): Call<User>
 
-    @GET("private/editprofile")
+    @GET("private/getcomponents")
     fun getComponents(@Query("userid") userId: Int): Call<ArrayList<Component>>
 }
 

@@ -1,55 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:transitionGroup="true"
-    tools:context=".ui.main.overview.OverviewFragment">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/pages_with_recycler_padding"
-        android:orientation="vertical">
+        android:transitionGroup="true"
+        tools:context=".ui.main.overview.OverviewFragment">
 
-        <TextView
-            android:id="@+id/text_drag_drop"
+
+
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="8dp"
-            android:text="@string/overview.drag.drop"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/pages_with_recycler_padding">
+
+            <TextView
+                android:id="@+id/text_drag_drop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:text="@string/overview.drag.drop"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/components_recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:paddingTop="@dimen/pages_with_recycler_padding"
-            android:paddingBottom="@dimen/pages_with_recycler_padding"
-            android:overScrollMode="never"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_drag_drop" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/components_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingTop="@dimen/pages_with_recycler_padding"
+                android:paddingBottom="@dimen/pages_with_recycler_padding"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_drag_drop" />
 
-        <include
-            android:id="@+id/newsComponent"
-            layout="@layout/layout_component_small"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layout_component_small_height"
-            android:layout_marginStart="@dimen/pages_with_recycler_padding"
-            android:layout_marginEnd="@dimen/pages_with_recycler_padding"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/components_recycler" />
+            <include
+                android:id="@+id/newsComponent"
+                layout="@layout/layout_component_small"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/layout_component_small_height"
+                android:layout_marginStart="@dimen/pages_with_recycler_padding"
+                android:layout_marginEnd="@dimen/pages_with_recycler_padding"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/components_recycler" />
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

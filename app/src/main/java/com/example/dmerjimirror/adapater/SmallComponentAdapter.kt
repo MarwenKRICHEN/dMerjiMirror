@@ -10,12 +10,13 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.model.response.Component
+import com.example.dmerjimirror.library.utils.Metrics
 import com.google.android.material.card.MaterialCardView
 import java.lang.Exception
 
 class SmallComponentAdapter(
     private val context: Context,
-    private val components: ArrayList<Component>,
+    private var components: ArrayList<Component>,
 ) :
     RecyclerView.Adapter<SmallComponentAdapter.MyViewHolder>() {
 
@@ -41,6 +42,7 @@ class SmallComponentAdapter(
             (holder.itemView as MaterialCardView?)?.cardElevation = 0f
         } else {
             holder.componentName?.text = component.name
+            (holder.itemView as MaterialCardView?)?.cardElevation = Metrics.getPxFromDpValue(5f, context).toFloat()
             try {
                 holder.componentImage?.setImageDrawable(
                     AppCompatResources.getDrawable(
@@ -66,6 +68,11 @@ class SmallComponentAdapter(
 
     fun getComponents(): ArrayList<Component> {
         return components
+    }
+
+    fun setComponents(components: ArrayList<Component>) {
+        this.components = components
+        notifyDataSetChanged()
     }
 
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,7 +18,10 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentOverviewBinding
+import com.example.dmerjimirror.library.extension.makeGone
+import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.response.Component
+import com.example.dmerjimirror.library.utils.Metrics
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 
@@ -53,14 +57,37 @@ class OverviewFragment : Fragment() {
         mRecyclerView.layoutManager = GridLayoutManager(this.context, 3)
         mRecyclerView.adapter = SmallComponentAdapter(
             requireContext(),
-            overviewViewModel.components.value ?: arrayListOf()
+            arrayListOf()
         )
 
+        overviewViewModel.refreshComponents()
         binding.newsComponent.componentName.text = context?.getString(R.string.component_news_feed)
         binding.newsComponent.componentImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.news_feed))
 
         overviewViewModel.components.observe(viewLifecycleOwner, Observer {
-            mRecyclerView.adapter
+            (mRecyclerView.adapter as SmallComponentAdapter).setComponents(it)
+        })
+
+        overviewViewModel.newsFeed.observe(viewLifecycleOwner, Observer {
+            if (it == null) {
+                binding.newsComponent.root.cardElevation = 0f
+                binding.newsComponent.componentName.text = ""
+                binding.newsComponent.componentImage.setImageDrawable(null)
+            } else {
+                binding.newsComponent.root.cardElevation = Metrics.getPxFromDpValue(5f, requireContext()).toFloat()
+                binding.newsComponent.componentName.text = getString(R.string.component_news_feed)
+                binding.newsComponent.componentImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.news_feed))
+            }
+        })
+
+        overviewViewModel.isRefreshing.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                binding.contentView.makeGone()
+                binding.progress.makeVisible()
+            } else {
+                binding.contentView.makeVisible()
+                binding.progress.makeGone()
+            }
         })
 
         setupDragAndDrop()
