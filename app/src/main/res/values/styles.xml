@@ -144,5 +144,73 @@
         <item name="android:fontFamily">@font/roboto_medium</item>
     </style>
 
+    <!--    Material Dialog-->
+
+    <style name="Default.Alert" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/black</item>
+        <!--        icon tint-->
+        <item name="colorSecondary">@color/black</item>
+        <!--        dialog bg color-->
+        <item name="colorSurface">@color/dialog</item>
+        <!--        title color-->
+        <item name="colorOnSurface">@color/black</item>
+
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text
+        </item>
+        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text
+        </item>
+        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Title.Text" parent="MaterialAlertDialog.Material3.Title.Text">
+        <!--        <item name="android:textSize">18sp</item>-->
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Bar.Button" parent="Widget.App.Button">
+        <item name="android:textColor">@color/alert</item>
+        <item name="rippleColor">#E35252</item>
+    </style>
+
+    <style name="Widget.App.Button" parent="Widget.Material3.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="ConfirmAlert" parent="Default.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/MaterialAlertDialog.App.Bar.Button</item>
+    </style>
+
+    <style name="Error.Alert" parent="Default.Alert">
+        <item name="materialAlertDialogTitleTextStyle">@style/Error.Alert.App.Title.Text
+        </item>
+        <item name="shapeAppearance">@style/Error.Alert.App.Shape</item>
+    </style>
+
+    <style name="Error.Alert.App.Title.Text" parent="MaterialAlertDialog.App.Title.Text">
+        <item name="android:textColor">@color/alert</item>
+    </style>
+
+    <style name="MaterialAlertDialog.App.Body.Text" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="Error.Alert.App.Shape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 
 </resources>

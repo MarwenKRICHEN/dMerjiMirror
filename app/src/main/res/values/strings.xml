@@ -17,6 +17,8 @@
     <string name="global.add">Add</string>
     <string name="global.undo">Undo</string>
     <string name="global.select">Select</string>
+    <string name="global.yes">Yes</string>
+    <string name="global.ok">OK</string>
 
     <!--    User-->
     <string name="user.full.name">Full name</string>

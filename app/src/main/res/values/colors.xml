@@ -24,4 +24,5 @@
     <color name="transparent">#00000000</color>
     <color name="settings_primary_text">#151522</color>
     <color name="setting_ripple">#B1B1B1</color>
+    <color name="dialog">#FFF</color>
 </resources>

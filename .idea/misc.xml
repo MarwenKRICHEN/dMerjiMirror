@@ -56,6 +56,7 @@
         <entry key="app/src/main/res/layout/layout_todo_element.xml" value="0.27207641601562504" />
         <entry key="app/src/main/res/layout/layout_todo_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_weather_details.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/menu/app_bar_menu.xml" value="0.2671875" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15462962962962962" />
       </map>
     </option>

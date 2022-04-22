@@ -1,6 +1,11 @@
 package com.example.dmerjimirror
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -10,8 +15,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dmerjimirror.databinding.ActivityMainBinding
+import com.example.dmerjimirror.dialog.MaterialDialogsCreator
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.test.UserTest
+import com.example.dmerjimirror.listener.DialogButtonsListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,6 +45,37 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
+    }
+
+    fun createSignOutDialog() {
+        MaterialDialogsCreator.createYesOrNoWithDescription(
+            getString(R.string.global_cancel),
+            getString(R.string.global_yes),
+            getString(R.string.sign_out_title),
+            getString(R.string.sign_out_description),
+            this,
+            object : DialogButtonsListener {
+                override fun onPositiveClick() {
+                    signOut()
+                }
+
+                override fun onNegativeClick() {}
+
+            }
+        )
+    }
+
+    fun signOut() {
+        val editor = getSharedPreferences(getString(R.string.auth_shared_preferences), Context.MODE_PRIVATE).edit()
+        editor.remove(getString(R.string.auth_shared_preferences_access_token))
+        editor.apply()
+        val intent = Intent(this, AuthenticationActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        this.finish()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -50,5 +88,21 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.overview_welcome, "Hey")
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.app_bar_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.signOut -> {
+            createSignOutDialog()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
 }

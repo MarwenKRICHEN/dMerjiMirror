@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.dmerjimirror.AuthenticationActivity
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentSignInBinding
@@ -88,7 +87,9 @@ class SignInFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("UserResponse", userResponse)
         intent.putExtras(bundle)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
+        activity?.finish()
     }
 
     override fun onDestroyView() {
