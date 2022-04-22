@@ -31,7 +31,7 @@ interface UserAPI {
     fun login(@Body user: UserLogin): Call<UserResponse>
 
     @POST("public/register")
-    fun register(@Body user: UserRegister): Call<String?>
+    fun register(@Body user: UserRegister): Call<Any?>
 
     @PUT("private/editprofile")
     fun updateProfile(@Body profile: UserUpdateProfile): Call<User>

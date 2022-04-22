@@ -12,13 +12,18 @@ import com.example.dmerjimirror.library.model.response.UserResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
+import kotlin.collections.ArrayList
 
 class UserController {
     companion object {
         fun login(user: UserLogin, callback: (UserResponse?, Throwable?) -> Unit) {
             val apiCall = UserAPI.create().login(user)
             apiCall.enqueue(object : Callback<UserResponse> {
-                override fun onResponse(call: Call<UserResponse>, response: Response<UserResponse>) {
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
                     response.body()?.let {
                         callback(it, null)
                     } ?: run {
@@ -33,19 +38,19 @@ class UserController {
             })
         }
 
-        fun register(user: UserRegister, callback: (String?, Throwable?) -> Unit) {
+        fun register(user: UserRegister, callback: (Any?, Throwable?, Int) -> Unit) {
             val apiCall = UserAPI.create().register(user)
-            apiCall.enqueue(object : Callback<String?> {
-                override fun onResponse(call: Call<String?>, response: Response<String?>) {
+            apiCall.enqueue(object : Callback<Any?> {
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     response.body()?.let {
-                        callback(it, null)
+                        callback(it, null, response.code())
                     } ?: run {
-                        callback(null, Throwable(response.errorBody()?.string()))
+                        callback(null, Throwable(response.errorBody()?.string()), response.code())
                     }
                 }
 
-                override fun onFailure(call: Call<String?>, t: Throwable) {
-                    callback(null, t)
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    callback(null, t, 400)
                 }
 
             })
@@ -95,7 +100,7 @@ class UserController {
 
         fun getComponents(userId: Int, callback: (ArrayList<Component>?, Throwable?) -> Unit) {
             val apiCall = UserAPI.create().getComponents(userId)
-            apiCall.enqueue(object : Callback<ArrayList<Component>>{
+            apiCall.enqueue(object : Callback<ArrayList<Component>> {
                 override fun onResponse(
                     call: Call<ArrayList<Component>>,
                     response: Response<ArrayList<Component>>

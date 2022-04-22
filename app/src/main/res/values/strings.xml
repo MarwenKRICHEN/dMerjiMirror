@@ -130,4 +130,10 @@
     <string name="error.field.not.empty">This fields cannot be empty</string>
     <string name="error.timeout">Connection timeout</string>
     <string name="error.invalid.credentials">Invalid Credentials</string>
+    <string name="error.username.length">Username should contain at least 4 characters</string>
+    <string name="error.password.length">Password should contain at least 4 characters</string>
+    <string name="error.confirm.password.match">This doesn\'t match your password</string>
+    <string name="error.email.invalid">Invalid email!</string>
+    <string name="error.email.username.exists">Username or Email already exists</string>
+    <string name="error.unknown">Unknown error!</string>
 </resources>
