@@ -1,6 +1,8 @@
 package com.example.dmerjimirror.library.model.response
 
-data class UserResponse(val token: String, val user: User)
+import java.io.Serializable
+
+data class UserResponse(val token: String, val user: User): Serializable
 
 data class User(
     val id: Int,
@@ -11,4 +13,4 @@ data class User(
     val avatar: String,
     val timeformat: Int,
     val unit: Int
-)
+): Serializable

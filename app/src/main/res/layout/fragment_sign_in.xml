@@ -55,10 +55,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_field_margin_top"
+            app:endIconMode="password_toggle"
             android:hint="@string/user.password"
             style="@style/MyTextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />

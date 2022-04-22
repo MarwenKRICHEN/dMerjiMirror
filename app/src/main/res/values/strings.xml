@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">dMerjiMirror</string>
 
+    <!--    Auth Shared Perefrences-->
+    <string name="auth.shared.preferences">AuthSharedPreferences</string>
+    <string name="auth.shared.preferences.access.token">AuthSharedPreferencesAccessToken</string>
     <!--    Global-->
     <string name="global.or">OR</string>
     <string name="global.overview">Overview</string>
@@ -10,6 +13,7 @@
     <string name="global.save">Save</string>
     <string name="global.delete">Delete</string>
     <string name="global.done">done</string>
+    <string name="global.error">error</string>
     <string name="global.add">Add</string>
     <string name="global.undo">Undo</string>
     <string name="global.select">Select</string>
@@ -124,4 +128,6 @@
 
     <!--    Error-->
     <string name="error.field.not.empty">This fields cannot be empty</string>
+    <string name="error.timeout">Connection timeout</string>
+    <string name="error.invalid.credentials">Invalid Credentials</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dmerjimirror.databinding.ActivityMainBinding
+import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.test.UserTest
 
 class MainActivity : AppCompatActivity() {
@@ -17,8 +18,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
+    lateinit var userResponse: UserResponse
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        userResponse = intent.getSerializableExtra("UserResponse") as UserResponse
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -33,8 +36,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_overview, R.id.navigation_components, R.id.navigation_settings
             )
         )
-
-        UserTest.testAll()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
     }

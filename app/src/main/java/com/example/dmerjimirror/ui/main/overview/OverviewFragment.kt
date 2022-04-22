@@ -18,6 +18,7 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.SmallComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentOverviewBinding
+import com.example.dmerjimirror.library.controller.UserController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.response.Component
@@ -60,7 +61,9 @@ class OverviewFragment : Fragment() {
             arrayListOf()
         )
 
-        overviewViewModel.refreshComponents()
+        (activity as? MainActivity)?.let {
+            overviewViewModel.refreshComponents(it.userResponse.user.id)
+        }
         binding.newsComponent.componentName.text = context?.getString(R.string.component_news_feed)
         binding.newsComponent.componentImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.news_feed))
 

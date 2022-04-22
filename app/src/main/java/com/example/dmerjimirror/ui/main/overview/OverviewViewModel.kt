@@ -26,9 +26,9 @@ class OverviewViewModel : ViewModel() {
 
     val components: LiveData<ArrayList<Component>> = _components
 
-    fun refreshComponents() {
+    fun refreshComponents(userid: Int) {
         _isRefreshing.value = true
-        UserController.getComponents(14) { components, throwable ->
+        UserController.getComponents(userid) { components, throwable ->
             if (components != null) {
 
                 val newComponents = arrayListOf<Component>()
