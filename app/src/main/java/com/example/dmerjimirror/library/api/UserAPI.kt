@@ -1,7 +1,9 @@
 package com.example.dmerjimirror.library.api
 
+import android.os.Bundle
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
+import com.example.dmerjimirror.library.model.request.user.UserToken
 import com.example.dmerjimirror.library.model.request.user.update.*
 import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.model.response.User
@@ -50,5 +52,13 @@ interface UserAPI {
 
     @GET("private/getcomponents")
     fun getComponents(@Query("userid") userId: Int): Call<ArrayList<Component>>
+
+    @PUT("private/updatepositions")
+    fun updateComponents(@Body components: ArrayList<Component>): Call<Any?>
+
+    @POST("public/refreshlogin")
+    fun refreshSignIn(@Body token: UserToken): Call<UserResponse>
+
+
 }
 

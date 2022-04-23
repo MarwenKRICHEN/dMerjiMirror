@@ -147,7 +147,8 @@ class OverviewFragment : Fragment() {
                     val card = (viewHolder.itemView as MaterialCardView?)
                     card?.isDragged = false
                     // update DB
-                    val arr = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
+                    val newComponents = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents() ?: arrayListOf()
+                    UserController.updateComponents(newComponents)
                 }
 
             }

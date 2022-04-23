@@ -4,6 +4,7 @@ import com.example.dmerjimirror.library.api.NewsFeedAPI
 import com.example.dmerjimirror.library.api.UserAPI
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
+import com.example.dmerjimirror.library.model.request.user.UserToken
 import com.example.dmerjimirror.library.model.request.user.update.*
 import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.model.response.NewsFeed
@@ -19,6 +20,27 @@ class UserController {
     companion object {
         fun login(user: UserLogin, callback: (UserResponse?, Throwable?) -> Unit) {
             val apiCall = UserAPI.create().login(user)
+            apiCall.enqueue(object : Callback<UserResponse> {
+                override fun onResponse(
+                    call: Call<UserResponse>,
+                    response: Response<UserResponse>
+                ) {
+                    response.body()?.let {
+                        callback(it, null)
+                    } ?: run {
+                        callback(null, Throwable(response.errorBody()?.string()))
+                    }
+                }
+
+                override fun onFailure(call: Call<UserResponse>, t: Throwable) {
+                    callback(null, t)
+                }
+
+            })
+        }
+
+        fun refreshSignIn(token: UserToken, callback: (UserResponse?, Throwable?) -> Unit) {
+            val apiCall = UserAPI.create().refreshSignIn(token)
             apiCall.enqueue(object : Callback<UserResponse> {
                 override fun onResponse(
                     call: Call<UserResponse>,
@@ -114,6 +136,21 @@ class UserController {
 
                 override fun onFailure(call: Call<ArrayList<Component>>, t: Throwable) {
                     callback(null, t)
+                }
+
+            })
+        }
+
+        fun updateComponents(components: ArrayList<Component>) {
+            val apiCall = UserAPI.create().updateComponents(components)
+            apiCall.enqueue(object : Callback<Any?> {
+                override fun onResponse(
+                    call: Call<Any?>,
+                    response: Response<Any?>
+                ) {
+                }
+
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
                 }
 
             })

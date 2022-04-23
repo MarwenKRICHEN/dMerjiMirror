@@ -69,7 +69,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun signOut() {
-        val editor = getSharedPreferences(getString(R.string.auth_shared_preferences), Context.MODE_PRIVATE).edit()
+        val editor = getSharedPreferences(
+            getString(R.string.auth_shared_preferences),
+            Context.MODE_PRIVATE
+        ).edit()
         editor.remove(getString(R.string.auth_shared_preferences_access_token))
         editor.apply()
         val intent = Intent(this, AuthenticationActivity::class.java)
