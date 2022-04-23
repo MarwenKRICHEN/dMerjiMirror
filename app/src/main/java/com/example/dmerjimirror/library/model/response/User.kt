@@ -16,11 +16,11 @@ data class User(
 ): Serializable
 
 enum class TimeFormat(val value: Int) {
-    TF12(0),
-    TF24(1),
+    TF12(1),
+    TF24(2),
 }
 
 enum class Unit(val value: Int) {
-    IMPERIAL(0),
-    METRIC(1),
+    IMPERIAL(1),
+    METRIC(2),
 }
