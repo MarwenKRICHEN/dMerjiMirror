@@ -41,6 +41,7 @@
         app:rippleColor="@color/black" />
 
     <EditText
+        android:id="@+id/fullName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -49,7 +50,6 @@
         android:layout_marginBottom="100dp"
         android:fontFamily="@font/roboto_bold"
         android:backgroundTint="@color/text_edit_tint"
-        android:text="Marwen Krichen"
         android:textAlignment="center"
         android:textSize="25sp"
         android:autofillHints="name" />

@@ -78,44 +78,53 @@ class UserController {
             })
         }
 
-        fun update(apiCall: Call<User>, callback: (User?, Throwable?) -> Unit) {
+        fun update(apiCall: Call<User>, callback: (User?, Throwable?, Int?) -> Unit) {
             apiCall.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     response.body()?.let {
-                        callback(it, null)
+                        callback(it, null, response.code())
                     } ?: run {
-                        callback(null, Throwable(response.errorBody()?.string()))
+                        callback(null, Throwable(response.errorBody()?.string()), response.code())
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    callback(null, t)
+                    callback(null, t, 400)
                 }
 
             })
         }
 
-        fun updateProfile(profile: UserUpdateProfile, callback: (User?, Throwable?) -> Unit) {
+        fun updateProfile(profile: UserUpdateProfile, callback: (User?, Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updateProfile(profile)
             update(apiCall, callback)
         }
 
-        fun updatePassword(profile: UserUpdatePassword, callback: (User?, Throwable?) -> Unit) {
+        fun updatePassword(profile: UserUpdatePassword, callback: (User?, Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updatePassword(profile)
             update(apiCall, callback)
         }
 
-        fun updateEmail(profile: UserUpdateEmail, callback: (User?, Throwable?) -> Unit) {
+        fun updateEmail(profile: UserUpdateEmail, callback: (Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updateEmail(profile)
-            update(apiCall, callback)
+            apiCall.enqueue(object : Callback<Any?>{
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                    callback(null, response.code())
+                }
+
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    callback(t, 500)
+                }
+
+            })
         }
 
-        fun updateTimeFormat(profile: UserUpdateTimeFormat, callback: (User?, Throwable?) -> Unit) {
+        fun updateTimeFormat(profile: UserUpdateTimeFormat, callback: (User?, Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updateTimeFormat(profile)
             update(apiCall, callback)
         }
 
-        fun updateUnit(profile: UserUpdateUnit, callback: (User?, Throwable?) -> Unit) {
+        fun updateUnit(profile: UserUpdateUnit, callback: (User?, Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updateUnit(profile)
             update(apiCall, callback)
         }

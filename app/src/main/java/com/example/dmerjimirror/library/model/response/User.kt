@@ -14,3 +14,13 @@ data class User(
     val timeformat: Int,
     val unit: Int
 ): Serializable
+
+enum class TimeFormat(val value: Int) {
+    TF12(0),
+    TF24(1),
+}
+
+enum class Unit(val value: Int) {
+    IMPERIAL(0),
+    METRIC(1),
+}

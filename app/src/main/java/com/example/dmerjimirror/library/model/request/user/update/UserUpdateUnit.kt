@@ -1,3 +1,3 @@
 package com.example.dmerjimirror.library.model.request.user.update
 
-class UserUpdateUnit(val id: String, val unit: String)
+class UserUpdateUnit(val id: Int, val unit: Int)

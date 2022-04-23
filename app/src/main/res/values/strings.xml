@@ -136,6 +136,8 @@
     <string name="error.password.length">Password should contain at least 4 characters</string>
     <string name="error.confirm.password.match">This doesn\'t match your password</string>
     <string name="error.email.invalid">Invalid email!</string>
+    <string name="error.password.invalid">invalid password!</string>
     <string name="error.email.username.exists">Username or Email already exists</string>
+    <string name="error.email.exists">Email already exists</string>
     <string name="error.unknown">Unknown error!</string>
 </resources>

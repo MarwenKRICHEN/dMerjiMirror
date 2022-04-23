@@ -5,9 +5,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -23,6 +25,7 @@ import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.utils.Metrics
+import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.transition.MaterialFadeThrough
 
@@ -31,6 +34,7 @@ class OverviewFragment : Fragment() {
     private var _binding: FragmentOverviewBinding? = null
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var overviewViewModel: OverviewViewModel
+    private val userResponseViewModel: UserResponseViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -51,7 +55,12 @@ class OverviewFragment : Fragment() {
         enterTransition = MaterialFadeThrough()
         exitTransition = MaterialFadeThrough()
 
-        (activity as MainActivity?)?.supportActionBar?.title = getString(R.string.overview_welcome, "Hey")
+        (activity as MainActivity?)?.let {
+            it.supportActionBar?.title = getString(
+                R.string.overview_welcome,
+                userResponseViewModel.userResponse.value?.user?.fullname
+            )
+        }
 
         mRecyclerView = binding.componentsRecycler
         mRecyclerView.itemAnimator = DefaultItemAnimator()
@@ -61,11 +70,17 @@ class OverviewFragment : Fragment() {
             arrayListOf()
         )
 
-        (activity as? MainActivity)?.let {
-            overviewViewModel.refreshComponents(it.userResponse.user.id)
+        userResponseViewModel.userResponse.value?.user?.let {
+            overviewViewModel.refreshComponents(it.id)
         }
+
         binding.newsComponent.componentName.text = context?.getString(R.string.component_news_feed)
-        binding.newsComponent.componentImage.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.news_feed))
+        binding.newsComponent.componentImage.setImageDrawable(
+            AppCompatResources.getDrawable(
+                requireContext(),
+                R.drawable.news_feed
+            )
+        )
 
         overviewViewModel.components.observe(viewLifecycleOwner, Observer {
             (mRecyclerView.adapter as SmallComponentAdapter).setComponents(it)
@@ -77,9 +92,15 @@ class OverviewFragment : Fragment() {
                 binding.newsComponent.componentName.text = ""
                 binding.newsComponent.componentImage.setImageDrawable(null)
             } else {
-                binding.newsComponent.root.cardElevation = Metrics.getPxFromDpValue(5f, requireContext()).toFloat()
+                binding.newsComponent.root.cardElevation =
+                    Metrics.getPxFromDpValue(5f, requireContext()).toFloat()
                 binding.newsComponent.componentName.text = getString(R.string.component_news_feed)
-                binding.newsComponent.componentImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.news_feed))
+                binding.newsComponent.componentImage.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.news_feed
+                    )
+                )
             }
         })
 
@@ -147,7 +168,9 @@ class OverviewFragment : Fragment() {
                     val card = (viewHolder.itemView as MaterialCardView?)
                     card?.isDragged = false
                     // update DB
-                    val newComponents = (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents() ?: arrayListOf()
+                    val newComponents =
+                        (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
+                            ?: arrayListOf()
                     UserController.updateComponents(newComponents)
                 }
 

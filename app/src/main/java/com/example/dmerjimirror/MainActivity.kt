@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -19,16 +20,18 @@ import com.example.dmerjimirror.dialog.MaterialDialogsCreator
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.test.UserTest
 import com.example.dmerjimirror.listener.DialogButtonsListener
+import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var userResponse: UserResponse
+    private val userResponseViewModel: UserResponseViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        userResponse = intent.getSerializableExtra("UserResponse") as UserResponse
+        val userResponse = intent.getSerializableExtra("UserResponse") as UserResponse?
+        userResponseViewModel.setUserResponse(userResponse)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -88,7 +91,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        supportActionBar?.title = getString(R.string.overview_welcome, "Hey")
+        supportActionBar?.title = getString(
+            R.string.overview_welcome,
+            userResponseViewModel.userResponse.value?.user?.fullname
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

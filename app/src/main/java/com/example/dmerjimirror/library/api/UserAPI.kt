@@ -42,7 +42,7 @@ interface UserAPI {
     fun updatePassword(@Body profile: UserUpdatePassword): Call<User>
 
     @PUT("private/editprofile")
-    fun updateEmail(@Body profile: UserUpdateEmail): Call<User>
+    fun updateEmail(@Body profile: UserUpdateEmail): Call<Any?>
 
     @PUT("private/editprofile")
     fun updateTimeFormat(@Body profile: UserUpdateTimeFormat): Call<User>
