@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
@@ -40,8 +41,12 @@ abstract class DetailFragment() : Fragment() {
     abstract fun saveData(): Boolean
 
     private fun dataSaved() {
-        if (saveData())
+        if (saveData()){
+            (activity as? MainActivity)?.let { activity ->
+                activity.mSocket?.emit("chat message", (userResponseViewModel.userResponse.value?.user?.id ?: -1).toString())
+            }
             activity?.onBackPressed()
+        }
     }
 
     protected fun showSnackbar(view: View) {

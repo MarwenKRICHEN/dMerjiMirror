@@ -21,9 +21,13 @@ import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.test.UserTest
 import com.example.dmerjimirror.listener.DialogButtonsListener
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
+import io.socket.client.IO
+import io.socket.client.Socket
+import java.net.URISyntaxException
 
 class MainActivity : AppCompatActivity() {
 
+    var mSocket: Socket? = null
     private lateinit var binding: ActivityMainBinding
     lateinit var navView: BottomNavigationView
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -48,9 +52,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        supportFragmentManager.popBackStack()
-        supportFragmentManager.popBackStack()
+        try {
+            mSocket = IO.socket("http://192.168.60.134:3001")
+            mSocket?.connect()
+        } catch (e: URISyntaxException) {
+            print(e)
+        }
     }
 
     fun createSignOutDialog() {
