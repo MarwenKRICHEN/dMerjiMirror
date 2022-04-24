@@ -5,8 +5,9 @@ class Calendar(
     name: String,
     position: String,
     active: Boolean,
+    userid: Int,
     val country: String,
-) : Component(id, name, position, active) {
+) : Component(id, name, position, active, userid) {
     companion object {
         val countries = arrayListOf(
             "Afghanistan",

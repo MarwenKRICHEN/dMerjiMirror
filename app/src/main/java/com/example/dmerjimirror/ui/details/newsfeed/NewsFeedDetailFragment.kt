@@ -15,6 +15,7 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.NewsFeedComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
+import com.example.dmerjimirror.library.controller.NewsFeedController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.model.response.NewsFeed
@@ -132,8 +133,26 @@ class NewsFeedDetailFragment() : DetailFragment(), View.OnClickListener, FeedLis
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
-    override fun saveData() {
+    override fun saveData(): Boolean {
+        newsFeedViewModel.component.value?.let {
+            (mRecyclerView.adapter as? NewsFeedComponentAdapter)?.let { adapter ->
+                val feeds = adapter.getFeeds()
+                NewsFeedController.update(
+                    NewsFeed(
+                        it.id,
+                        it.name,
+                        it.position,
+                        adapter.getIsEnabled(),
+                        it.userid,
+                        adapter.getShowDescription(),
+                        feeds
+                    )
+                ) { _, _ -> }
+            }
 
+        }
+
+        return true
     }
 
     override fun onDestroyView() {

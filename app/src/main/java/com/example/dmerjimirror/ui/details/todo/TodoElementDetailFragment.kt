@@ -16,6 +16,7 @@ import com.example.dmerjimirror.R
 import com.example.dmerjimirror.adapater.NewsFeedComponentAdapter
 import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
+import com.example.dmerjimirror.library.controller.TodoListController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.library.model.response.NewsFeed
@@ -150,8 +151,23 @@ class TodoElementDetailFragment : DetailFragment(), View.OnClickListener, TodoEl
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
-    override fun saveData() {
-
+    override fun saveData(): Boolean {
+        (mRecyclerView.adapter as? TodoComponentAdapter)?.let { adapter ->
+            todoDetailViewModel.component.value?.let {
+                TodoListController.update(
+                    Todo(
+                        it.id,
+                        it.name,
+                        it.position,
+                        adapter.getIsEnabled(),
+                        it.userid,
+                        adapter.getPeriodicity(),
+                        adapter.getTodoList()
+                    )
+                ) { _, _ -> }
+            }
+        }
+        return true
     }
 
     override fun onPause() {

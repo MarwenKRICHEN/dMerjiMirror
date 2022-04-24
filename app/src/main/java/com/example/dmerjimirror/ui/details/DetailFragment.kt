@@ -13,7 +13,7 @@ import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.snackbar.Snackbar
 
-abstract class DetailFragment(): Fragment() {
+abstract class DetailFragment() : Fragment() {
     protected val userResponseViewModel: UserResponseViewModel by activityViewModels()
 
     // enables options menu in this fragment
@@ -37,15 +37,15 @@ abstract class DetailFragment(): Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    abstract fun saveData()
+    abstract fun saveData(): Boolean
 
     private fun dataSaved() {
-        saveData()
-        activity?.onBackPressed()
+        if (saveData())
+            activity?.onBackPressed()
     }
 
     protected fun showSnackbar(view: View) {
-        Snackbar.make(view ,getString(R.string.error_unknown), Snackbar.LENGTH_LONG)
+        Snackbar.make(view, getString(R.string.error_unknown), Snackbar.LENGTH_LONG)
             .show()
     }
 

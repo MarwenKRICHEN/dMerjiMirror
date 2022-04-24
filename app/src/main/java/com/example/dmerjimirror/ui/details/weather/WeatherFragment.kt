@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentWeatherBinding
+import com.example.dmerjimirror.library.controller.WeatherController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
+import com.example.dmerjimirror.library.model.response.Weather
 import com.example.dmerjimirror.ui.details.DetailFragment
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -72,8 +74,34 @@ class WeatherFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData() {
+    override fun saveData(): Boolean {
+        weatherViewModel.weather.value?.let {
+            if (!checkFields()) {
+                WeatherController.update(
+                    Weather(
+                        it.id,
+                        it.name,
+                        it.position,
+                        binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked,
+                        it.userid,
+                        binding.weatherLayout.location.editText?.text.toString()
+                    )
+                ) { _, _ -> }
+                return true
+            }
+        }
+        return false
+    }
 
+    private fun checkFields(): Boolean {
+        var error = false
+
+        if ((binding.weatherLayout.location.editText?.text ?: "").toString() == "") {
+            error = true
+            binding.weatherLayout.location.error = getString(R.string.error_field_not_empty)
+        }
+
+        return error
     }
 
     override fun onDestroyView() {

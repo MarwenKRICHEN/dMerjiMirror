@@ -5,9 +5,10 @@ class Clock(
     name: String,
     position: String,
     active: Boolean,
+    userid: Int,
     val timezone: String,
     val isdigital: Boolean
-) : Component(id, name, position, active) {
+) : Component(id, name, position, active, userid) {
     companion object {
         val timeZones = arrayListOf(
             "Africa/Abidjan",

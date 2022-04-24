@@ -9,8 +9,11 @@ import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.model.response.Todo
+import com.example.dmerjimirror.library.model.response.TodoElement
 import com.example.dmerjimirror.listener.TodoElementListener
+import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
 import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
@@ -30,6 +33,8 @@ class TodoComponentAdapter(
 ) :
     ComponentAdapter(context, activity, items) {
 
+    private lateinit var componentHeaderViewHolder: ViewHolderComponentHeader
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): ViewHolder {
         when (type) {
             Items.HEADER -> {
@@ -42,6 +47,7 @@ class TodoComponentAdapter(
                 val view = LayoutInflater
                     .from(viewGroup.context)
                     .inflate(R.layout.layout_todo_header, viewGroup, false)
+                componentHeaderViewHolder = ViewHolderComponentHeader(view)
                 return ViewHolderComponentHeader(view)
             }
             Items.TODO -> {
@@ -63,16 +69,16 @@ class TodoComponentAdapter(
     inner class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
         private val name: TextView? = itemView.findViewById(R.id.component_name)
         private val image: ImageView? = itemView.findViewById(R.id.component_image)
-        private val enabledSwitch: SwitchMaterial? =
+        val enabledSwitch: SwitchMaterial? =
             itemView.findViewById(R.id.componentEnabledSwitch)
-        private val periodicityDropList: TextInputLayout? = itemView.findViewById(R.id.periodicity)
+        val periodicityDropList: TextInputLayout? = itemView.findViewById(R.id.periodicity)
 
         override fun bindType(item: Items) {
             (item as ComponentHeader?)?.apply {
                 name?.text = this.component.name
                 enabledSwitch?.isChecked = this.component.active
                 image?.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.todo_list))
-                val items = listOf("Daily", "Monthly", "Yearly", "All")
+                val items = Todo.listOfPeriodicity
                 val adapter = ArrayAdapter(context, R.layout.drop_down_list_item, items)
                 (periodicityDropList?.editText as? AutoCompleteTextView)?.let {
                     it.setAdapter(adapter)
@@ -138,6 +144,27 @@ class TodoComponentAdapter(
     fun updateTodoItem(todoItem: TodoItem, position: Int) {
         items[position] = todoItem
         notifyItemChanged(position)
+    }
+
+    fun getTodoList(): ArrayList<TodoElement> {
+        val elements = ArrayList<TodoElement>()
+        for (item in items) {
+            if (item is TodoItem) {
+                elements.add(item.todo)
+            }
+        }
+        return elements
+    }
+
+    fun getIsEnabled(): Boolean {
+        return componentHeaderViewHolder.enabledSwitch?.isChecked ?: false
+    }
+
+    fun getPeriodicity(): Int {
+        (componentHeaderViewHolder.periodicityDropList?.editText as? AutoCompleteTextView)?.let {
+            return Todo.listOfPeriodicity.indexOf(it.text.toString())
+        }
+        return 0
     }
 
 

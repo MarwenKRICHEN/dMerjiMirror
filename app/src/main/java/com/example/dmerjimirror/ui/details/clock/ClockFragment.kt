@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentClockBinding
+import com.example.dmerjimirror.library.controller.ClockController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.model.response.Clock
+import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.example.dmerjimirror.ui.details.DetailFragment
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -38,6 +40,7 @@ class ClockFragment : DetailFragment() {
 
         _binding = FragmentClockBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        MaterialTextInput.setupClearErrors(binding.root)
 
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
@@ -74,8 +77,35 @@ class ClockFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData() {
+    override fun saveData(): Boolean {
+        clockViewModel.clock.value?.let {
+            if (!checkFields()) {
+                ClockController.update(
+                    Clock(
+                        it.id,
+                        it.name,
+                        it.position,
+                        binding.componentHeader.componentEnabledSwitch.isChecked,
+                        it.userid,
+                        binding.timeZone.editText?.text.toString(),
+                        binding.digitalModeSwitch.isChecked
+                    )
+                ) { _, _ -> }
+                return true
+            }
+        }
+        return false
+    }
 
+    private fun checkFields(): Boolean {
+        var error = false
+
+        if ((binding.timeZone.editText?.text ?: "").toString() == "") {
+            error = true
+            binding.timeZone.error = getString(R.string.error_field_not_empty)
+        }
+
+        return error
     }
 
     override fun onDestroyView() {

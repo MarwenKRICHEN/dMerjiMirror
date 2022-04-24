@@ -5,12 +5,12 @@ class Todo(
     name: String,
     position: String,
     active: Boolean,
+    userid: Int,
     var periodicity: Int,
     val list: ArrayList<TodoElement>? = null
-) :
-    Component(id, name, position, active) {
+) : Component(id, name, position, active, 0) {
 
-    constructor() : this(0, "", "", false, 0)
+    constructor() : this(0, "", "", false, 0, 0)
 
     class Periodicity {
         companion object {
@@ -19,5 +19,9 @@ class Todo(
             const val MONTHLY = 2
             const val ALL = 3
         }
+    }
+
+    companion object {
+        val listOfPeriodicity = listOf("Daily", "Monthly", "Yearly", "All")
     }
 }

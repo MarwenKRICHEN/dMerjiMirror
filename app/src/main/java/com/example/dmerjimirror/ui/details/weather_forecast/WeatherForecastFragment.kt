@@ -12,11 +12,16 @@ import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentWeatherBinding
 import com.example.dmerjimirror.databinding.FragmentWeatherForecastBinding
+import com.example.dmerjimirror.library.controller.WeatherController
+import com.example.dmerjimirror.library.controller.WeatherForecastController
 import com.example.dmerjimirror.library.extension.makeGone
+import com.example.dmerjimirror.library.model.response.Weather
+import com.example.dmerjimirror.library.model.response.WeatherForecast
 import com.example.dmerjimirror.ui.details.DetailFragment
 import com.example.dmerjimirror.ui.details.weather.WeatherViewModel
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
+import java.lang.Exception
 
 class WeatherForecastFragment : DetailFragment() {
     private var _binding: FragmentWeatherForecastBinding? = null
@@ -45,13 +50,18 @@ class WeatherForecastFragment : DetailFragment() {
         userResponseViewModel.userResponse.value?.let {
             weatherForecastViewModel.refresh(it.user.id)
         }
-        var stepperNb = binding.numberOfDays.text.toString().toInt()
+        var stepperNb = try {
+            binding.numberOfDays.text.toString().toInt()
+        } catch (e: Exception) {
+            1
+        }
 
         weatherForecastViewModel.weather.observe(viewLifecycleOwner, Observer {
             if (it == null && weatherForecastViewModel.isRefreshing.value == false)
                 showSnackbar(binding.root)
             binding.weatherLayout.componentHeader.componentName.text = it?.name ?: ""
-            binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked = it?.active ?: false
+            binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked =
+                it?.active ?: false
             binding.weatherLayout.componentHeader.componentImage.setImageDrawable(
                 AppCompatResources.getDrawable(
                     requireContext(),
@@ -85,8 +95,41 @@ class WeatherForecastFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData() {
+    override fun saveData(): Boolean {
+        val stepperNb = try {
+            binding.numberOfDays.text.toString().toInt()
+        } catch (e: Exception) {
+            1
+        }
+        weatherForecastViewModel.weather.value?.let {
+            if (!checkFields()) {
+                WeatherForecastController.update(
+                    WeatherForecast(
+                        it.id,
+                        it.name,
+                        it.position,
+                        binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked,
+                        it.userid,
+                        binding.weatherLayout.location.editText?.text.toString(),
+                        stepperNb,
+                        binding.enableColorSwitch.isChecked
+                    )
+                ) { _, _ -> }
+                return true
+            }
+        }
+        return false
+    }
 
+    private fun checkFields(): Boolean {
+        var error = false
+
+        if ((binding.weatherLayout.location.editText?.text ?: "").toString() == "") {
+            error = true
+            binding.weatherLayout.location.error = getString(R.string.error_field_not_empty)
+        }
+
+        return error
     }
 
     override fun onDestroyView() {

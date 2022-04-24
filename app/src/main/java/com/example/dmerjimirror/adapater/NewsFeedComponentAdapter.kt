@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
@@ -21,6 +22,9 @@ class NewsFeedComponentAdapter(
     items: ArrayList<Items>,
     private val showAddFeedListener: View.OnClickListener,
 ) : ComponentAdapter(context, activity, items) {
+
+    private lateinit var componentHeaderViewHolder: ViewHolderComponentHeader
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, type: Int): ViewHolder {
 
         when (type) {
@@ -34,6 +38,7 @@ class NewsFeedComponentAdapter(
                 val view = LayoutInflater
                     .from(viewGroup.context)
                     .inflate(R.layout.layout_news_feed_header, viewGroup, false)
+                componentHeaderViewHolder = ViewHolderComponentHeader(view)
                 return ViewHolderComponentHeader(view)
             }
             Items.FEEDS -> {
@@ -55,9 +60,9 @@ class NewsFeedComponentAdapter(
     inner class ViewHolderComponentHeader(itemView: View) : ViewHolder(itemView) {
         private val name: TextView? = itemView.findViewById(R.id.component_name)
         private val image: ImageView? = itemView.findViewById(R.id.component_image)
-        private val enabledSwitch: SwitchMaterial? =
+        val enabledSwitch: SwitchMaterial? =
             itemView.findViewById(R.id.componentEnabledSwitch)
-        private val showDescriptionSwitch: SwitchMaterial? =
+        val showDescriptionSwitch: SwitchMaterial? =
             itemView.findViewById(R.id.showDescriptionSwitch)
 
         override fun bindType(item: Items) {
@@ -106,6 +111,24 @@ class NewsFeedComponentAdapter(
     fun addFeedItems(feedItems: ArrayList<FeedItem>) {
         items.addAll(feedItems)
         notifyDataSetChanged()
+    }
+
+    fun getFeeds(): ArrayList<Feed> {
+        val feeds = ArrayList<Feed>()
+        for (item in items) {
+            if (item is FeedItem) {
+                feeds.add(item.feed)
+            }
+        }
+        return feeds
+    }
+
+    fun getIsEnabled(): Boolean {
+        return componentHeaderViewHolder.enabledSwitch?.isChecked ?: false
+    }
+
+    fun getShowDescription(): Boolean {
+        return componentHeaderViewHolder.showDescriptionSwitch?.isChecked ?: false
     }
 
 }

@@ -11,7 +11,7 @@ class ComplimentViewModel: DetailViewModel() {
 
     private val _compliment = MutableLiveData<Component>().apply {
         this.value =
-            Component(0, "Compliment", Component.Position.TOP_CENTER, true)
+            Component(0, "Compliment", Component.Position.TOP_CENTER, true, 0)
     }
 
     val compliment: LiveData<Component> = _compliment

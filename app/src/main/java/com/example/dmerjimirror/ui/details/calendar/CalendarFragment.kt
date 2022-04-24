@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentCalendarBinding
+import com.example.dmerjimirror.library.controller.CalendarController
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.model.response.Calendar
+import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.example.dmerjimirror.ui.details.DetailFragment
 import com.google.android.material.transition.MaterialSharedAxis
 
@@ -38,6 +40,8 @@ class CalendarFragment : DetailFragment() {
 
         _binding = FragmentCalendarBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        MaterialTextInput.setupClearErrors(binding.root)
 
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
@@ -72,8 +76,34 @@ class CalendarFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData() {
+    override fun saveData(): Boolean {
+        calendarViewModel.calendar.value?.let {
+            if (!checkFields()) {
+                CalendarController.update(
+                    Calendar(
+                        it.id,
+                        it.name,
+                        it.position,
+                        binding.componentHeader.componentEnabledSwitch.isChecked,
+                        it.userid,
+                        binding.country.editText?.text.toString()
+                    )
+                ) { calendar, throwable -> }
+                return true
+            }
+        }
+        return false
+    }
 
+    private fun checkFields(): Boolean {
+        var error = false
+
+        if ((binding.country.editText?.text ?: "").toString() == "") {
+            error = true
+            binding.country.error = getString(R.string.error_field_not_empty)
+        }
+
+        return error
     }
 
     override fun onDestroyView() {

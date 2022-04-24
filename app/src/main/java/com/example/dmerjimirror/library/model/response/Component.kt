@@ -1,7 +1,13 @@
 package com.example.dmerjimirror.library.model.response
 
-open class Component(val id: Int, val name: String, var position: String, var active: Boolean) {
-    constructor() : this(0, "", "", true)
+open class Component(
+    val id: Int,
+    val name: String,
+    var position: String,
+    var active: Boolean,
+    val userid: Int
+) {
+    constructor() : this(0, "", "", true, 0)
 
     fun getImageName(): String {
         var newName = name
@@ -38,7 +44,7 @@ open class Component(val id: Int, val name: String, var position: String, var ac
                     }
                     components[from].position = getPositionStringFromIndex(to)
                 } else {
-                    for (i in from + 1 .. to) {
+                    for (i in from + 1..to) {
                         components[i].moveBackward()
                     }
                     components[from].position = getPositionStringFromIndex(to)

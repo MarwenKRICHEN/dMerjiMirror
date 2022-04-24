@@ -18,7 +18,7 @@ class OverviewViewModel : ViewModel() {
         this.value = null
     }
 
-    val  newsFeed: LiveData<Component?> = _newsFeed
+    val newsFeed: LiveData<Component?> = _newsFeed
 
     private val _components = MutableLiveData<ArrayList<Component>>().apply {
         value = arrayListOf()
@@ -34,7 +34,8 @@ class OverviewViewModel : ViewModel() {
                 val newComponents = arrayListOf<Component>()
                 for (i in 0..5) {
                     val component = components.firstOrNull {
-                        it.position.lowercase() == Component.getPositionStringFromIndex(i).lowercase()
+                        it.position.lowercase() == Component.getPositionStringFromIndex(i)
+                            .lowercase()
                                 && it.active
                     }
                     if (component != null) {
@@ -45,7 +46,8 @@ class OverviewViewModel : ViewModel() {
                                 -1,
                                 "",
                                 Component.getPositionStringFromIndex(i),
-                                false
+                                false,
+                                -1
                             )
                         )
                     }
@@ -57,7 +59,7 @@ class OverviewViewModel : ViewModel() {
                 _components.value = newComponents
             } else {
                 _components.value = arrayListOf()
-                _newsFeed. value = null
+                _newsFeed.value = null
             }
             _isRefreshing.value = false
 

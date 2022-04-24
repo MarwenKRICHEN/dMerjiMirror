@@ -27,7 +27,7 @@ interface TodoListAPI {
     @GET("private/gettodolist")
     fun getTodo(@Query("userid") userId: Int): Call<Todo>
 
-    @PUT("private/getnewsfeed")
+    @PUT("private/updatetodo")
     fun updateTodo(@Body todo: Todo): Call<Todo>
 
     @POST("private/addtodoelement")
