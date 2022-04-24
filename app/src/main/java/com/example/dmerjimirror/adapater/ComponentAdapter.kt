@@ -14,7 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 abstract class ComponentAdapter(
     val context: Context,
     val activity: Activity,
-    protected val items: ArrayList<Items>
+    protected var items: ArrayList<Items>
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var lastRemovedItem: Items? = null
     private var lastRemovedItemIndex: Int? = null
@@ -80,5 +80,11 @@ abstract class ComponentAdapter(
             }
         }
 
+    }
+
+
+    fun reloadItems(items: ArrayList<Items>) {
+        this.items = items
+        notifyDataSetChanged()
     }
 }

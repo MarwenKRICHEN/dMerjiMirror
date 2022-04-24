@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -19,18 +20,18 @@ import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.utils.SwipeToDeleteHelper
 import com.example.dmerjimirror.listener.FeedListener
+import com.example.dmerjimirror.ui.details.DetailFragment
 import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
+import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoAddHeader
 import com.google.android.material.transition.MaterialSharedAxis
 
-class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
+class NewsFeedDetailFragment() : DetailFragment(), View.OnClickListener, FeedListener {
     private var _binding: FragmentComponentRecyclerDetailBinding? = null
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var newsFeedViewModel: NewsFeedViewModel
 
-    private var newsFeed: NewsFeed? = null
-    private var feedList: ArrayList<Feed>? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -58,8 +59,7 @@ class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         mRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        newsFeed = newsFeedViewModel.component.value
-        feedList = newsFeedViewModel.feedList.value
+        val newsFeed = newsFeedViewModel.component.value
 
         mRecyclerView.adapter = NewsFeedComponentAdapter(
             requireContext(),
@@ -70,16 +70,39 @@ class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
             ),
             this
         )
-        val feedItems = ArrayList<FeedItem>()
-        for (feed in feedList ?: ArrayList()) {
-            feedItems.add(FeedItem(feed))
-        }
-        (mRecyclerView.adapter as NewsFeedComponentAdapter?)?.addFeedItems(feedItems)
+
+        reloadAdapter(newsFeed)
+
         setupSwipeGesture()
+
+        userResponseViewModel.userResponse.value?.let {
+            newsFeedViewModel.refresh(it.user.id)
+        }
+
+        newsFeedViewModel.component.observe(viewLifecycleOwner, Observer {
+            if (it == null && newsFeedViewModel.isRefreshing.value == false)
+                showSnackbar(binding.root)
+            reloadAdapter(it)
+        })
+
+        newsFeedViewModel.isRefreshing.observe(viewLifecycleOwner, Observer {
+            toggleProgressViews(it, binding.recyclerView, binding.progress)
+        })
 
 
 
         return root
+    }
+
+    private fun reloadAdapter(newsFeed: NewsFeed?) {
+        val feedList = newsFeed?.list
+        val items = ArrayList<Items>()
+        items.add(ComponentHeader(newsFeed ?: NewsFeed()))
+        items.add(TodoAddHeader())
+        for (feed in feedList ?: ArrayList()) {
+            items.add(FeedItem(feed))
+        }
+        (mRecyclerView.adapter as? NewsFeedComponentAdapter)?.reloadItems(items)
     }
 
     // show add TodoElement
@@ -107,6 +130,10 @@ class NewsFeedDetailFragment(): Fragment(), View.OnClickListener, FeedListener {
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
+    }
+
+    override fun saveData() {
+
     }
 
     override fun onDestroyView() {

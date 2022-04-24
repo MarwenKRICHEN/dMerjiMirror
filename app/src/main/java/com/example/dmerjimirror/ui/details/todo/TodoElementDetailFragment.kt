@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -12,27 +13,29 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dmerjimirror.MainActivity
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.adapater.NewsFeedComponentAdapter
 import com.example.dmerjimirror.adapater.TodoComponentAdapter
 import com.example.dmerjimirror.databinding.FragmentComponentRecyclerDetailBinding
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
+import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.model.response.Todo
 import com.example.dmerjimirror.library.model.response.TodoElement
 import com.example.dmerjimirror.library.utils.SwipeToDeleteHelper
 import com.example.dmerjimirror.listener.TodoElementListener
+import com.example.dmerjimirror.ui.details.DetailFragment
+import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
 import com.example.dmerjimirror.ui.details.todo.model.ComponentHeader
+import com.example.dmerjimirror.ui.details.todo.model.Items
 import com.example.dmerjimirror.ui.details.todo.model.TodoAddHeader
 import com.example.dmerjimirror.ui.details.todo.model.TodoItem
 import com.google.android.material.transition.MaterialSharedAxis
 
 
-class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementListener {
+class TodoElementDetailFragment : DetailFragment(), View.OnClickListener, TodoElementListener {
     private var _binding: FragmentComponentRecyclerDetailBinding? = null
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var todoDetailViewModel: TodoDetailViewModel
-
-    private var todo: Todo? = null
-    private var todoList: ArrayList<TodoElement>? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -60,8 +63,7 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
         mRecyclerView.itemAnimator = DefaultItemAnimator()
         mRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-        todo = todoDetailViewModel.component.value
-        todoList = todoDetailViewModel.todoList.value
+        val todo = todoDetailViewModel.component.value
 
         mRecyclerView.adapter = TodoComponentAdapter(
             requireContext(),
@@ -73,16 +75,37 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
             this,
             this
         )
-        val todoItems = ArrayList<TodoItem>()
-        for (todo in todoList ?: ArrayList()) {
-            todoItems.add(TodoItem(todo))
-        }
-        (mRecyclerView.adapter as TodoComponentAdapter?)?.addTodoItems(todoItems)
+        reloadAdapter(todo)
         setupSwipeGesture()
+
+        userResponseViewModel.userResponse.value?.let {
+            todoDetailViewModel.refresh(it.user.id)
+        }
+
+        todoDetailViewModel.component.observe(viewLifecycleOwner, Observer {
+            if (it == null && todoDetailViewModel.isRefreshing.value == false)
+                showSnackbar(binding.root)
+            reloadAdapter(it)
+        })
+
+        todoDetailViewModel.isRefreshing.observe(viewLifecycleOwner, Observer {
+            toggleProgressViews(it, binding.recyclerView, binding.progress)
+        })
 
 
 
         return root
+    }
+
+    private fun reloadAdapter(todo: Todo?) {
+        val todoList = todo?.list
+        val items = ArrayList<Items>()
+        items.add(ComponentHeader(todo ?: Todo()))
+        items.add(TodoAddHeader())
+        for (todoElement in todoList ?: ArrayList()) {
+            items.add(TodoItem(todoElement))
+        }
+        (mRecyclerView.adapter as? TodoComponentAdapter)?.reloadItems(items)
     }
 
     // show add TodoElement
@@ -125,6 +148,10 @@ class TodoElementDetailFragment : Fragment(), View.OnClickListener, TodoElementL
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
+    }
+
+    override fun saveData() {
+
     }
 
     override fun onPause() {

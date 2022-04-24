@@ -13,11 +13,12 @@ import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentWeatherBinding
 import com.example.dmerjimirror.databinding.FragmentWeatherForecastBinding
 import com.example.dmerjimirror.library.extension.makeGone
+import com.example.dmerjimirror.ui.details.DetailFragment
 import com.example.dmerjimirror.ui.details.weather.WeatherViewModel
 import com.google.android.material.transition.MaterialFadeThrough
 import com.google.android.material.transition.MaterialSharedAxis
 
-class WeatherForecastFragment : Fragment() {
+class WeatherForecastFragment : DetailFragment() {
     private var _binding: FragmentWeatherForecastBinding? = null
     private lateinit var weatherForecastViewModel: WeatherForecastViewModel
 
@@ -41,21 +42,33 @@ class WeatherForecastFragment : Fragment() {
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
 
+        userResponseViewModel.userResponse.value?.let {
+            weatherForecastViewModel.refresh(it.user.id)
+        }
+        var stepperNb = binding.numberOfDays.text.toString().toInt()
+
         weatherForecastViewModel.weather.observe(viewLifecycleOwner, Observer {
-            binding.weatherLayout.componentHeader.componentName.text = it.name
-            binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked = it.active
+            if (it == null && weatherForecastViewModel.isRefreshing.value == false)
+                showSnackbar(binding.root)
+            binding.weatherLayout.componentHeader.componentName.text = it?.name ?: ""
+            binding.weatherLayout.componentHeader.componentEnabledSwitch.isChecked = it?.active ?: false
             binding.weatherLayout.componentHeader.componentImage.setImageDrawable(
                 AppCompatResources.getDrawable(
                     requireContext(),
                     R.drawable.forecast
                 )
             )
-            binding.weatherLayout.location.editText?.setText(it.location)
-            binding.numberOfDays.text = it.numberofdays.toString()
-            binding.enableColorSwitch.isChecked = it.colored
+            binding.weatherLayout.location.editText?.setText(it?.location ?: "")
+            binding.numberOfDays.text = (it?.numberofdays ?: 3).toString()
+            stepperNb = it?.numberofdays ?: 3
+            binding.enableColorSwitch.isChecked = it?.colored ?: false
         })
 
-        var stepperNb = binding.numberOfDays.text.toString().toInt()
+
+        weatherForecastViewModel.isRefreshing.observe(viewLifecycleOwner, Observer {
+            toggleProgressViews(it, binding.contentMain, binding.progress)
+        })
+
         binding.stepperPlus.setOnClickListener {
             if (stepperNb < 12)
                 stepperNb++
@@ -70,6 +83,10 @@ class WeatherForecastFragment : Fragment() {
 
 
         return root
+    }
+
+    override fun saveData() {
+
     }
 
     override fun onDestroyView() {

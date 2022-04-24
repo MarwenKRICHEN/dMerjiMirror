@@ -15,9 +15,10 @@ import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentCalendarBinding
 import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.model.response.Calendar
+import com.example.dmerjimirror.ui.details.DetailFragment
 import com.google.android.material.transition.MaterialSharedAxis
 
-class CalendarFragment : Fragment() {
+class CalendarFragment : DetailFragment() {
     private var _binding: FragmentCalendarBinding? = null
     private lateinit var calendarViewModel: CalendarViewModel
 
@@ -41,9 +42,15 @@ class CalendarFragment : Fragment() {
         enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true)
         returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false)
 
+        userResponseViewModel.userResponse.value?.let {
+            calendarViewModel.refresh(it.user.id)
+        }
+
         calendarViewModel.calendar.observe(viewLifecycleOwner, Observer {
-            binding.componentHeader.componentName.text = it.name
-            binding.componentHeader.componentEnabledSwitch.isChecked = it.active
+            if (it == null && calendarViewModel.isRefreshing.value == false)
+                showSnackbar(binding.root)
+            binding.componentHeader.componentName.text = it?.name ?: ""
+            binding.componentHeader.componentEnabledSwitch.isChecked = it?.active ?: false
             binding.componentHeader.componentImage.setImageDrawable(
                 AppCompatResources.getDrawable(
                     requireContext(),
@@ -54,12 +61,19 @@ class CalendarFragment : Fragment() {
             val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, items)
             (binding.country.editText as? AutoCompleteTextView)?.let { it1 ->
                 it1.setAdapter(adapter)
-                it1.setText(it.country)
+                it1.setText(it?.country ?: "")
             }
         })
 
+        calendarViewModel.isRefreshing.observe(viewLifecycleOwner, Observer {
+            toggleProgressViews(it, binding.contentMain, binding.progress)
+        })
 
         return root
+    }
+
+    override fun saveData() {
+
     }
 
     override fun onDestroyView() {

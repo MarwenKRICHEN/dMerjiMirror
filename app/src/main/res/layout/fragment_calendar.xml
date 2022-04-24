@@ -1,43 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:transitionGroup="true"
     tools:context=".ui.details.calendar.CalendarFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/component_header"
-            layout="@layout/layout_component_detail_header" />
+    <ScrollView
+        android:id="@+id/contentMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-
-        <TextView
-            style="@style/Details.TextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/pages_padding"
-            android:text="@string/calendar.country" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/country"
-            style="@style/MyDropDownListLayout"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/pages_padding">
+            android:orientation="vertical">
 
-            <AutoCompleteTextView
+            <include
+                android:id="@+id/component_header"
+                layout="@layout/layout_component_detail_header" />
+
+
+            <TextView
+                style="@style/Details.TextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/pages_padding"
+                android:text="@string/calendar.country" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/country"
+                style="@style/MyDropDownListLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textAutoComplete"
-                android:padding="10dp" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_marginHorizontal="@dimen/pages_padding">
 
-    </LinearLayout>
+                <AutoCompleteTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textAutoComplete"
+                    android:padding="10dp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-</ScrollView>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
