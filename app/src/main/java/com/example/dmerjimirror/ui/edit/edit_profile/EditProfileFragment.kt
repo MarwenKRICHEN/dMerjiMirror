@@ -2,6 +2,9 @@ package com.example.dmerjimirror.ui.edit.edit_profile
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +12,10 @@ import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentEditProfileBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
@@ -19,6 +25,10 @@ import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 
 class EditProfileFragment : RoundedBottomSheetDialogFragment() {
@@ -26,6 +36,8 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment() {
     private var _binding: FragmentEditProfileBinding? = null
     private val userResponseViewModel: UserResponseViewModel by activityViewModels()
     private var userUpdateProfile: UserUpdateProfile? = null
+    private var resultLauncher: ActivityResultLauncher<Intent>? = null
+    private var imageBody: MultipartBody.Part? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -58,6 +70,15 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment() {
         binding.header.cancelButton.setOnClickListener {
             dismissAllowingStateLoss()
         }
+
+
+//        binding.appLogo.setOnClickListener {
+//            val intent = Intent()
+//            intent.type = "image/*"
+//            intent.action = Intent.ACTION_GET_CONTENT
+//            resultLauncher?.launch(Intent.createChooser(intent, "Select Picture"))
+//        }
+
         userResponseViewModel.userResponse.value?.let { userResponse ->
             binding.fullName.setText(userResponse.user.fullname)
 
@@ -97,9 +118,27 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment() {
     }
 
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // save goals
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val selectedImage = result.data?.data
+                    selectedImage?.let { uploadFile(it) }
+                }
+            }
+    }
+
+    fun uploadFile(uri: Uri) {
+        lifecycleScope.launch {
+            val stream = this@EditProfileFragment.activity?.contentResolver?.openInputStream(uri) ?: return@launch
+            val request = RequestBody.create(MediaType.parse("image/*"), stream.readBytes()) // read all bytes using kotlin extension
+            imageBody = MultipartBody.Part.createFormData(
+                "file",
+                "test.jpg",
+                request
+            )
+        }
     }
 
 

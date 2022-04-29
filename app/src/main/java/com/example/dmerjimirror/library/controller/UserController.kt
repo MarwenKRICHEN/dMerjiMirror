@@ -1,20 +1,23 @@
 package com.example.dmerjimirror.library.controller
 
-import com.example.dmerjimirror.library.api.NewsFeedAPI
+import android.R.attr.description
 import com.example.dmerjimirror.library.api.UserAPI
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.UserToken
 import com.example.dmerjimirror.library.model.request.user.update.*
 import com.example.dmerjimirror.library.model.response.Component
-import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.collections.ArrayList
+
 
 class UserController {
     companion object {
@@ -78,6 +81,31 @@ class UserController {
             })
         }
 
+        private fun getMultipartBodyFromString(string: String): RequestBody {
+            return MultipartBody.create(MediaType.parse("multipart/form-data"), string)
+        }
+
+        fun registerWithImage(
+            images: ArrayList<MultipartBody.Part>,
+            callback: (Any?, Throwable?, Int) -> Unit
+        ) {
+            val apiCall = UserAPI.create().registerWithPhoto(images)
+            apiCall.enqueue(object : Callback<Any?> {
+                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+                    response.body()?.let {
+                        callback(it, null, response.code())
+                    } ?: run {
+                        callback(null, Throwable(response.errorBody()?.string()), response.code())
+                    }
+                }
+
+                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                    callback(null, t, 400)
+                }
+
+            })
+        }
+
         fun update(apiCall: Call<User>, callback: (User?, Throwable?, Int?) -> Unit) {
             apiCall.enqueue(object : Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
@@ -100,14 +128,17 @@ class UserController {
             update(apiCall, callback)
         }
 
-        fun updatePassword(profile: UserUpdatePassword, callback: (User?, Throwable?, Int?) -> Unit) {
+        fun updatePassword(
+            profile: UserUpdatePassword,
+            callback: (User?, Throwable?, Int?) -> Unit
+        ) {
             val apiCall = UserAPI.create().updatePassword(profile)
             update(apiCall, callback)
         }
 
         fun updateEmail(profile: UserUpdateEmail, callback: (Throwable?, Int?) -> Unit) {
             val apiCall = UserAPI.create().updateEmail(profile)
-            apiCall.enqueue(object : Callback<Any?>{
+            apiCall.enqueue(object : Callback<Any?> {
                 override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
                     callback(null, response.code())
                 }
@@ -119,7 +150,10 @@ class UserController {
             })
         }
 
-        fun updateTimeFormat(profile: UserUpdateTimeFormat, callback: (User?, Throwable?, Int?) -> Unit) {
+        fun updateTimeFormat(
+            profile: UserUpdateTimeFormat,
+            callback: (User?, Throwable?, Int?) -> Unit
+        ) {
             val apiCall = UserAPI.create().updateTimeFormat(profile)
             update(apiCall, callback)
         }

@@ -26,6 +26,7 @@
             android:text="@string/sign.up.create.account"/>
 
         <LinearLayout
+            android:id="@+id/app_logoContainer"
             android:layout_width="wrap_content"
             android:padding="20dp"
             android:layout_gravity="center"

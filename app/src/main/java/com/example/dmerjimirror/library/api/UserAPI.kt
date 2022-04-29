@@ -1,6 +1,5 @@
 package com.example.dmerjimirror.library.api
 
-import android.os.Bundle
 import com.example.dmerjimirror.library.model.request.user.UserLogin
 import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.UserToken
@@ -9,10 +8,14 @@ import com.example.dmerjimirror.library.model.response.Component
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.utils.Constants
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+
 
 interface UserAPI {
     companion object {
@@ -34,6 +37,12 @@ interface UserAPI {
 
     @POST("public/register")
     fun register(@Body user: UserRegister): Call<Any?>
+
+    @Multipart
+    @POST("public/addImages")
+    fun registerWithPhoto(
+        @Part image: ArrayList<MultipartBody.Part>,
+    ): Call<Any?>
 
     @PUT("private/editprofile")
     fun updateProfile(@Body profile: UserUpdateProfile): Call<User>
