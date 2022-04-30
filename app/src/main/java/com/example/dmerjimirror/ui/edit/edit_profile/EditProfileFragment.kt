@@ -16,12 +16,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.adapater.ProfileImagesAdapter
 import com.example.dmerjimirror.databinding.FragmentEditProfileBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
 import com.example.dmerjimirror.library.controller.UserController
 import com.example.dmerjimirror.library.model.request.user.update.UserUpdateProfile
+import com.example.dmerjimirror.library.model.response.ProfileImage
 import com.example.dmerjimirror.library.model.response.UserResponse
+import com.example.dmerjimirror.listener.AdapterPositionListener
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -29,9 +34,10 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.util.*
 
 
-class EditProfileFragment : RoundedBottomSheetDialogFragment() {
+class EditProfileFragment : RoundedBottomSheetDialogFragment(), AdapterPositionListener {
 
     private var _binding: FragmentEditProfileBinding? = null
     private val userResponseViewModel: UserResponseViewModel by activityViewModels()
@@ -72,12 +78,16 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment() {
         }
 
 
-//        binding.appLogo.setOnClickListener {
-//            val intent = Intent()
-//            intent.type = "image/*"
-//            intent.action = Intent.ACTION_GET_CONTENT
-//            resultLauncher?.launch(Intent.createChooser(intent, "Select Picture"))
-//        }
+
+
+        binding.recyclerView.itemAnimator = DefaultItemAnimator()
+        binding.recyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.recyclerView.adapter = ProfileImagesAdapter(
+            arrayListOf(),
+            this,
+            requireContext()
+        )
+
 
         userResponseViewModel.userResponse.value?.let { userResponse ->
             binding.fullName.setText(userResponse.user.fullname)
@@ -124,15 +134,39 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val selectedImage = result.data?.data
-                    selectedImage?.let { uploadFile(it) }
+                    selectedImage?.let {
+                        (binding.recyclerView.adapter as? ProfileImagesAdapter)?.addImage(
+                            ProfileImage(
+                                UUID.randomUUID().toString(),
+                                it
+                            )
+                        )
+                        getImageBody(it)
+                    }
                 }
             }
     }
 
-    fun uploadFile(uri: Uri) {
+
+    override fun onAdd() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        resultLauncher?.launch(Intent.createChooser(intent, "Select Picture"))
+    }
+
+    override fun onRemove(position: Int) {
+        (binding.recyclerView.adapter as? ProfileImagesAdapter)?.removeImage(position)
+    }
+
+    private fun getImageBody(uri: Uri) {
         lifecycleScope.launch {
-            val stream = this@EditProfileFragment.activity?.contentResolver?.openInputStream(uri) ?: return@launch
-            val request = RequestBody.create(MediaType.parse("image/*"), stream.readBytes()) // read all bytes using kotlin extension
+            val stream = this@EditProfileFragment.activity?.contentResolver?.openInputStream(uri)
+                ?: return@launch
+            val request = RequestBody.create(
+                MediaType.parse("image/*"),
+                stream.readBytes()
+            ) // read all bytes using kotlin extension
             imageBody = MultipartBody.Part.createFormData(
                 "file",
                 "test.jpg",

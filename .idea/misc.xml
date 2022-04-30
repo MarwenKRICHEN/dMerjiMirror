@@ -36,9 +36,9 @@
         <entry key="app/src/main/res/layout/fragment_component_recycler_detail.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_components.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.121875" />
-        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.13513513513513514" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.24003623188405798" />
-        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.14056224899598393" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_sign_in.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.24003623188405798" />
@@ -56,6 +56,7 @@
         <entry key="app/src/main/res/layout/layout_settings_edit_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_todo_element.xml" value="0.27207641601562504" />
         <entry key="app/src/main/res/layout/layout_todo_header.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_user_image.xml" value="0.33811475409836067" />
         <entry key="app/src/main/res/layout/layout_weather_details.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/menu/app_bar_menu.xml" value="0.2671875" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.15462962962962962" />
