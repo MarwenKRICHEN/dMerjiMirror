@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/drawable/avatar_circle_background.xml" value="0.1935" />
         <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/check_icon_white.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/compliment.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/components.xml" value="0.1055" />
         <entry key="app/src/main/res/drawable/cursor.xml" value="0.124" />
         <entry key="app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.1" />
@@ -51,7 +52,7 @@
         <entry key="app/src/main/res/layout/layout_component_detail_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_large.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_component_small.xml" value="0.24003623188405798" />
-        <entry key="app/src/main/res/layout/layout_feed.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/layout_feed.xml" value="0.23430962343096234" />
         <entry key="app/src/main/res/layout/layout_news_feed_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_settings_edit_header.xml" value="0.24003623188405798" />
         <entry key="app/src/main/res/layout/layout_todo_element.xml" value="0.27207641601562504" />

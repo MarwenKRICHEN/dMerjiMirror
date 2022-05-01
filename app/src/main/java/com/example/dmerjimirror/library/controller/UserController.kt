@@ -7,6 +7,7 @@ import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.UserToken
 import com.example.dmerjimirror.library.model.request.user.update.*
 import com.example.dmerjimirror.library.model.response.Component
+import com.example.dmerjimirror.library.model.response.ProfileImage
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
 import okhttp3.MediaType
@@ -85,13 +86,13 @@ class UserController {
             return MultipartBody.create(MediaType.parse("multipart/form-data"), string)
         }
 
-        fun registerWithImage(
-            images: ArrayList<MultipartBody.Part>,
+        fun addImage(
+            image: MultipartBody.Part,
             callback: (Any?, Throwable?, Int) -> Unit
         ) {
-            val apiCall = UserAPI.create().registerWithPhoto(images)
-            apiCall.enqueue(object : Callback<Any?> {
-                override fun onResponse(call: Call<Any?>, response: Response<Any?>) {
+            val apiCall = UserAPI.create().addImage(image)
+            apiCall.enqueue(object : Callback<ProfileImage> {
+                override fun onResponse(call: Call<ProfileImage>, response: Response<ProfileImage>) {
                     response.body()?.let {
                         callback(it, null, response.code())
                     } ?: run {
@@ -99,7 +100,7 @@ class UserController {
                     }
                 }
 
-                override fun onFailure(call: Call<Any?>, t: Throwable) {
+                override fun onFailure(call: Call<ProfileImage>, t: Throwable) {
                     callback(null, t, 400)
                 }
 

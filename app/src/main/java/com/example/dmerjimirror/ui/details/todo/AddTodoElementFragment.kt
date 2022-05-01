@@ -27,7 +27,8 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
     private var todoElement: TodoElement? = null
     private var position: Int? = null
     override var state: Int = BottomSheetBehavior.STATE_COLLAPSED
-    private var simpleDateFormat: SimpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+    private var simpleDateFormat: SimpleDateFormat =
+        SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -64,7 +65,10 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
         binding.header.cancelButton.setOnClickListener {
             dismissAllowingStateLoss()
         }
-        binding.header.saveButton.text = context?.getString(R.string.global_add) ?: ""
+        binding.header.saveButton.text = if (todoElement == null)
+            context?.getString(R.string.global_add) ?: ""
+        else
+            context?.getString(R.string.global_update)
 
         binding.todoDeadLine.editText?.setOnClickListener {
             val datePicker =
@@ -126,8 +130,8 @@ class AddTodoElementFragment : RoundedBottomSheetDialogFragment() {
                                     position!!
                                 )
                     }
-                } catch (e: Exception) {}
-                finally {
+                } catch (e: Exception) {
+                } finally {
                     dismissAllowingStateLoss()
                 }
             }

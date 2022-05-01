@@ -27,7 +27,7 @@ class DirectionAdapter(private val component: Component) {
             "Calendar" -> {
                 ComponentsFragmentDirections.actionNavigationComponentsToCalendarFragment()
             }
-            "Compliment" -> {
+            "Compliments" -> {
                 ComponentsFragmentDirections.actionNavigationComponentsToComplimentFragment()
             }
             else -> null

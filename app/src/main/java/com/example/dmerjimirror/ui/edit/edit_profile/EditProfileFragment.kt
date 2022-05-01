@@ -1,14 +1,12 @@
 package com.example.dmerjimirror.ui.edit.edit_profile
 
 import android.app.Activity
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,8 +26,6 @@ import com.example.dmerjimirror.library.model.response.ProfileImage
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.listener.AdapterPositionListener
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -134,14 +130,17 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment(), AdapterPositionL
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val selectedImage = result.data?.data
+                    selectedImage?.path
                     selectedImage?.let {
-                        (binding.recyclerView.adapter as? ProfileImagesAdapter)?.addImage(
-                            ProfileImage(
-                                UUID.randomUUID().toString(),
-                                it
-                            )
+                        val image = ProfileImage(
+                            UUID.randomUUID().toString() + ".png",
+                            ProfileImage.State.LOADING
                         )
-                        getImageBody(it)
+                        (binding.recyclerView.adapter as? ProfileImagesAdapter)?.addImage(image)
+                        val currentPosition =
+                            (binding.recyclerView.adapter as? ProfileImagesAdapter)?.images?.count()
+                                ?.minus(1)
+                        uploadImage(image, selectedImage)
                     }
                 }
             }
@@ -159,19 +158,27 @@ class EditProfileFragment : RoundedBottomSheetDialogFragment(), AdapterPositionL
         (binding.recyclerView.adapter as? ProfileImagesAdapter)?.removeImage(position)
     }
 
-    private fun getImageBody(uri: Uri) {
+    private fun uploadImage(image: ProfileImage, uri: Uri) {
         lifecycleScope.launch {
-            val stream = this@EditProfileFragment.activity?.contentResolver?.openInputStream(uri)
-                ?: return@launch
+            val stream =
+                this@EditProfileFragment.activity?.contentResolver?.openInputStream(uri)
+                    ?: return@launch
             val request = RequestBody.create(
                 MediaType.parse("image/*"),
                 stream.readBytes()
             ) // read all bytes using kotlin extension
             imageBody = MultipartBody.Part.createFormData(
                 "file",
-                "test.jpg",
+                image.name,
                 request
             )
+            imageBody?.let {
+                UserController.addImage(it) { result, t, code ->
+                    (binding.recyclerView.adapter as? ProfileImagesAdapter)?.uploadCompleted(
+                        image.name
+                    )
+                }
+            }
         }
     }
 

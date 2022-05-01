@@ -13,7 +13,7 @@ class ComponentsViewModel : ViewModel() {
         Component(0, "Todo List", Component.Position.TOP_LEFT, true, 0),
         Component(0, "Calendar", Component.Position.MIDDLE_RIGHT, true, 0),
         Component(0, "News Feed", Component.Position.MIDDLE_RIGHT, true, 0),
-        Component(0, "Compliment", Component.Position.MIDDLE_RIGHT, true, 0),
+        Component(0, "Compliments", Component.Position.MIDDLE_RIGHT, true, 0),
         Component(0, "Forecast", Component.Position.MIDDLE_RIGHT, true, 0),
     )
 

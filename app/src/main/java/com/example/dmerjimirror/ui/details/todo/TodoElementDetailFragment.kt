@@ -143,8 +143,6 @@ class TodoElementDetailFragment : DetailFragment(), View.OnClickListener, TodoEl
                 position,
                 R.string.todo_element_deleted
             ) {
-                // TODO: delete from DB
-//                deleteItem((lastRemovedItem as TodoItem?)?.todo?.id)
             }
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)

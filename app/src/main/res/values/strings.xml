@@ -15,6 +15,7 @@
     <string name="global.done">done</string>
     <string name="global.error">error</string>
     <string name="global.add">Add</string>
+    <string name="global.update">Update</string>
     <string name="global.undo">Undo</string>
     <string name="global.select">Select</string>
     <string name="global.yes">Yes</string>
@@ -113,8 +114,12 @@
     <string name="news.feed.add.title">Add provider</string>
 
     <!--    Feed-->
-    <string name="feed.deleted">feed "%1$s" has been deleted</string>
-    <string name="feed.select.provider">Select news feed provider</string>
+    <string name="feed.deleted">feed has been deleted</string>
+    <string name="feed.select.category">Select Category</string>
+    <string name="feed.select.country">Select Country</string>
+    <string name="feed.category">Category : %1$s</string>
+    <string name="feed.country">Country : %1$s</string>
+    <string name="feed.no.filter">No filters</string>
 
     <!--    Weather Detail-->
     <string name="weather.location">Location</string>

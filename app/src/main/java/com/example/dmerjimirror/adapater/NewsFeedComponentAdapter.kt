@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.content.res.AppCompatResources
 import com.example.dmerjimirror.R
+import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.model.response.Feed
 import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.ui.details.newsfeed.model.FeedItem
@@ -95,10 +96,19 @@ class NewsFeedComponentAdapter(
     }
 
     inner class ViewHolderFeedItem(itemView: View) : ViewHolder(itemView) {
-        private val title: TextView? = itemView.findViewById(R.id.feedTitle)
+        private val category: TextView? = itemView.findViewById(R.id.feedCategory)
+        private val country: TextView? = itemView.findViewById(R.id.feedCountry)
         override fun bindType(item: Items) {
             (item as FeedItem?)?.apply {
-                title?.text = this.feed.title
+                val noFilters = context.getString(R.string.feed_no_filter)
+                if (this.feed.category != "")
+                    category?.text = context.getString(R.string.feed_category, this.feed.category)
+                else
+                    category?.text = context.getString(R.string.feed_category, noFilters)
+                if (this.feed.country != "")
+                    country?.text = context.getString(R.string.feed_country, this.feed.country)
+                else
+                    country?.text = context.getString(R.string.feed_country, noFilters)
             }
         }
     }

@@ -55,8 +55,7 @@ abstract class ComponentAdapter(
             view,
             context.getString(
                 message,
-                (lastRemovedItem as? TodoItem?)?.todo?.name,
-                (lastRemovedItem as? FeedItem?)?.feed?.title,
+                (lastRemovedItem as? TodoItem?)?.todo?.name
             ),
             Snackbar.LENGTH_LONG
         )

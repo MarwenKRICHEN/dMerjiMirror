@@ -125,8 +125,6 @@ class NewsFeedDetailFragment() : DetailFragment(), View.OnClickListener, FeedLis
                 position,
                 R.string.feed_deleted
             ) {
-                // TODO: delete from DB
-//                deleteItem((lastRemovedItem as TodoItem?)?.todo?.id)
             }
         }
         val itemTouchHelper = ItemTouchHelper(simpleCallback)

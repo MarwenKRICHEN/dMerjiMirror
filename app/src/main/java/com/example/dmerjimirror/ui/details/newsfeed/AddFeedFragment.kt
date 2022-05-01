@@ -10,6 +10,7 @@ import com.example.dmerjimirror.R
 import com.example.dmerjimirror.databinding.FragmentAddFeedBinding
 import com.example.dmerjimirror.dialog.RoundedBottomSheetDialogFragment
 import com.example.dmerjimirror.library.model.response.Feed
+import com.example.dmerjimirror.library.model.response.NewsFeed
 import com.example.dmerjimirror.library.utils.MaterialTextInput
 import com.example.dmerjimirror.listener.FeedListener
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -48,19 +49,18 @@ class AddFeedFragment : RoundedBottomSheetDialogFragment() {
         }
         binding.header.saveButton.text = getString(R.string.global_add)
 
-        val items = listOf("Daily", "Monthly", "Yearly", "All")
-        val adapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, items)
-        (binding.providerList.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+        val listOfCategories = NewsFeed.listOfCategories
+        val listOfCountries = NewsFeed.listOfCountries
+        val categoriesAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, listOfCategories)
+        val countriesAdapter = ArrayAdapter(requireContext(), R.layout.drop_down_list_item, listOfCountries)
+        (binding.categoryList.editText as? AutoCompleteTextView)?.setAdapter(categoriesAdapter)
+        (binding.countryList.editText as? AutoCompleteTextView)?.setAdapter(countriesAdapter)
 
         binding.header.saveButton.setOnClickListener {
-            val name = binding.providerList.editText?.text?.toString() ?: ""
-            var error = false
-            if (name == "") {
-                binding.providerList.error = getString(R.string.error_field_not_empty)
-                error = true
-            }
-            if (!error) {
-                elementListener?.addFeed(Feed(0, name, ""))
+            val category = binding.categoryList.editText?.text?.toString() ?: ""
+            val country = binding.countryList.editText?.text?.toString() ?: ""
+            if (category != "" || country != "") {
+                elementListener?.addFeed(Feed(0, category, country))
                 dismissAllowingStateLoss()
             }
 

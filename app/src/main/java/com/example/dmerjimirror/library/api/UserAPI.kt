@@ -5,6 +5,7 @@ import com.example.dmerjimirror.library.model.request.user.UserRegister
 import com.example.dmerjimirror.library.model.request.user.UserToken
 import com.example.dmerjimirror.library.model.request.user.update.*
 import com.example.dmerjimirror.library.model.response.Component
+import com.example.dmerjimirror.library.model.response.ProfileImage
 import com.example.dmerjimirror.library.model.response.User
 import com.example.dmerjimirror.library.model.response.UserResponse
 import com.example.dmerjimirror.library.utils.Constants
@@ -39,10 +40,10 @@ interface UserAPI {
     fun register(@Body user: UserRegister): Call<Any?>
 
     @Multipart
-    @POST("public/addImages")
-    fun registerWithPhoto(
-        @Part image: ArrayList<MultipartBody.Part>,
-    ): Call<Any?>
+    @POST("public/addImage")
+    fun addImage(
+        @Part image: MultipartBody.Part,
+    ): Call<ProfileImage>
 
     @PUT("private/editprofile")
     fun updateProfile(@Body profile: UserUpdateProfile): Call<User>

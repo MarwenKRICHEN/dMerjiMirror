@@ -112,6 +112,10 @@ class TodoComponentAdapter(
                 name?.text = this.todo.name
                 deadLine?.text = formatter.format(this.todo.deadline)
                 doneCheckBox?.isChecked = this.todo.done
+
+                doneCheckBox?.setOnCheckedChangeListener { compoundButton, b ->
+                    this.todo.done = b
+                }
             }
         }
 
