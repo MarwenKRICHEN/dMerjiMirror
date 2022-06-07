@@ -171,7 +171,11 @@ class OverviewFragment : Fragment() {
                     val newComponents =
                         (mRecyclerView.adapter as SmallComponentAdapter?)?.getComponents()
                             ?: arrayListOf()
-                    UserController.updateComponents(newComponents)
+                    UserController.updateComponents(newComponents) {
+                        (activity as? MainActivity)?.let { activity ->
+                            activity.mSocket?.emit("chat message", (userResponseViewModel.userResponse.value?.user?.id ?: -1).toString())
+                        }
+                    }
                 }
 
             }

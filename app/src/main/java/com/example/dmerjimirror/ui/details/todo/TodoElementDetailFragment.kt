@@ -149,7 +149,7 @@ class TodoElementDetailFragment : DetailFragment(), View.OnClickListener, TodoEl
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         (mRecyclerView.adapter as? TodoComponentAdapter)?.let { adapter ->
             todoDetailViewModel.component.value?.let {
                 TodoListController.update(
@@ -162,10 +162,11 @@ class TodoElementDetailFragment : DetailFragment(), View.OnClickListener, TodoEl
                         adapter.getPeriodicity(),
                         adapter.getTodoList()
                     )
-                ) { _, _ -> }
+                ) { _, _ ->
+                    dataSaved()
+                }
             }
         }
-        return true
     }
 
     override fun onPause() {

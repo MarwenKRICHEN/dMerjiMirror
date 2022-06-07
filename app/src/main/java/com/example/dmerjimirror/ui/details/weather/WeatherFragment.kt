@@ -74,7 +74,7 @@ class WeatherFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         weatherViewModel.weather.value?.let {
             if (!checkFields()) {
                 WeatherController.update(
@@ -86,11 +86,11 @@ class WeatherFragment : DetailFragment() {
                         it.userid,
                         binding.weatherLayout.location.editText?.text.toString()
                     )
-                ) { _, _ -> }
-                return true
+                ) { _, _ ->
+                    dataSaved()
+                }
             }
         }
-        return false
     }
 
     private fun checkFields(): Boolean {

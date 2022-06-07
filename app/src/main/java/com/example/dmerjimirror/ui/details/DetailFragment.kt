@@ -13,6 +13,10 @@ import com.example.dmerjimirror.library.extension.makeGone
 import com.example.dmerjimirror.library.extension.makeVisible
 import com.example.dmerjimirror.ui.main.view_model.UserResponseViewModel
 import com.google.android.material.snackbar.Snackbar
+import io.socket.client.IO
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
 abstract class DetailFragment() : Fragment() {
     protected val userResponseViewModel: UserResponseViewModel by activityViewModels()
@@ -33,20 +37,24 @@ abstract class DetailFragment() : Fragment() {
     // handles clicks
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.save -> dataSaved()
+            R.id.save -> saveData()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    abstract fun saveData(): Boolean
+    abstract fun saveData()
 
-    private fun dataSaved() {
-        if (saveData()){
-            (activity as? MainActivity)?.let { activity ->
-                activity.mSocket?.emit("chat message", (userResponseViewModel.userResponse.value?.user?.id ?: -1).toString())
-            }
-            activity?.onBackPressed()
+    protected fun dataSaved() {
+
+        (activity as? MainActivity)?.let { activity ->
+            activity.mSocket?.emit(
+                "chat message",
+                (userResponseViewModel.userResponse.value?.user?.id ?: -1).toString()
+            )
         }
+        activity?.onBackPressed()
+
+
     }
 
     protected fun showSnackbar(view: View) {

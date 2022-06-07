@@ -95,7 +95,7 @@ class WeatherForecastFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         val stepperNb = try {
             binding.numberOfDays.text.toString().toInt()
         } catch (e: Exception) {
@@ -114,11 +114,11 @@ class WeatherForecastFragment : DetailFragment() {
                         stepperNb,
                         binding.enableColorSwitch.isChecked
                     )
-                ) { _, _ -> }
-                return true
+                ) { _, _ ->
+                    dataSaved()
+                }
             }
         }
-        return false
     }
 
     private fun checkFields(): Boolean {

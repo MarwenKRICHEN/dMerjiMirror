@@ -70,7 +70,7 @@ class ComplimentFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         complimentViewModel.compliment.value?.let {
             ComplimentsController.update(
                 Component(
@@ -81,10 +81,9 @@ class ComplimentFragment : DetailFragment() {
                     it.userid
                 )
             ) { component, throwable ->
-
+                dataSaved()
             }
         }
-        return true
     }
 
 

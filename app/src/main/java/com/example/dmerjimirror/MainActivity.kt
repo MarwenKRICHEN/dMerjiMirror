@@ -53,11 +53,14 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         try {
-            mSocket = IO.socket("http://192.168.60.134:3001")
+            mSocket = IO.socket("http://172.20.10.3:3001")
             mSocket?.connect()
         } catch (e: URISyntaxException) {
             print(e)
         }
+
+        mSocket?.emit("chat message", (userResponseViewModel.userResponse.value?.user?.id ?: -1).toString())
+
     }
 
     fun createSignOutDialog() {

@@ -75,7 +75,7 @@ class CalendarFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         calendarViewModel.calendar.value?.let {
             if (!checkFields()) {
                 CalendarController.update(
@@ -87,11 +87,11 @@ class CalendarFragment : DetailFragment() {
                         it.userid,
                         binding.country.editText?.text.toString()
                     )
-                ) { calendar, throwable -> }
-                return true
+                ) { calendar, throwable ->
+                    dataSaved()
+                }
             }
         }
-        return false
     }
 
     private fun checkFields(): Boolean {

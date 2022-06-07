@@ -77,7 +77,7 @@ class ClockFragment : DetailFragment() {
         return root
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         clockViewModel.clock.value?.let {
             if (!checkFields()) {
                 ClockController.update(
@@ -90,11 +90,12 @@ class ClockFragment : DetailFragment() {
                         binding.timeZone.editText?.text.toString(),
                         binding.digitalModeSwitch.isChecked
                     )
-                ) { _, _ -> }
-                return true
+                ) { _, _ ->
+                    dataSaved()
+                }
+
             }
         }
-        return false
     }
 
     private fun checkFields(): Boolean {

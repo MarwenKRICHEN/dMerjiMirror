@@ -185,13 +185,14 @@ class UserController {
             })
         }
 
-        fun updateComponents(components: ArrayList<Component>) {
+        fun updateComponents(components: ArrayList<Component>, callback: () -> Unit) {
             val apiCall = UserAPI.create().updateComponents(components)
             apiCall.enqueue(object : Callback<Any?> {
                 override fun onResponse(
                     call: Call<Any?>,
                     response: Response<Any?>
                 ) {
+                    callback()
                 }
 
                 override fun onFailure(call: Call<Any?>, t: Throwable) {

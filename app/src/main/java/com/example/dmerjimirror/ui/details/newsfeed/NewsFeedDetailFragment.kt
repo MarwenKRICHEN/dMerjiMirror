@@ -131,7 +131,7 @@ class NewsFeedDetailFragment() : DetailFragment(), View.OnClickListener, FeedLis
         itemTouchHelper.attachToRecyclerView(mRecyclerView)
     }
 
-    override fun saveData(): Boolean {
+    override fun saveData() {
         newsFeedViewModel.component.value?.let {
             (mRecyclerView.adapter as? NewsFeedComponentAdapter)?.let { adapter ->
                 val feeds = adapter.getFeeds()
@@ -145,12 +145,12 @@ class NewsFeedDetailFragment() : DetailFragment(), View.OnClickListener, FeedLis
                         adapter.getShowDescription(),
                         feeds
                     )
-                ) { _, _ -> }
+                ) { _, _ ->
+                    dataSaved()
+                }
             }
 
         }
-
-        return true
     }
 
     override fun onDestroyView() {
